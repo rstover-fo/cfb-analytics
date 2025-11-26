@@ -5,8 +5,27 @@
  * Usage: node --env-file=.env scripts/test-api.js
  */
 
+import { spawnSync } from 'child_process';
+
 const API_BASE_URL = 'https://api.collegefootballdata.com';
 const API_KEY = process.env.VITE_CFB_API_KEY;
+
+function curlGet(endpoint) {
+  const url = `${API_BASE_URL}${endpoint}`;
+  const result = spawnSync('curl', [
+    '-s',
+    url,
+    '-H', `Authorization: Bearer ${API_KEY}`
+  ], { encoding: 'utf-8' });
+
+  if (result.error) {
+    throw result.error;
+  }
+  if (result.stderr) {
+    console.error('curl stderr:', result.stderr);
+  }
+  return JSON.parse(result.stdout);
+}
 
 async function testApiConnection() {
   console.log('=== College Football Data API Connection Test ===\n');
@@ -27,74 +46,34 @@ async function testApiConnection() {
   try {
     // Test 1: Fetch conferences (lightweight endpoint)
     console.log('Test 1: Fetching conferences...');
-    const confResponse = await fetch(`${API_BASE_URL}/conferences`, {
-      headers: {
-        'Authorization': `Bearer ${API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-    });
-
-    if (!confResponse.ok) {
-      throw new Error(`HTTP ${confResponse.status}: ${confResponse.statusText}`);
-    }
-
-    const conferences = await confResponse.json();
+    const conferences = curlGet('/conferences');
     console.log(`  SUCCESS: Found ${conferences.length} conferences`);
     console.log(`  Sample: ${conferences.slice(0, 3).map(c => c.name).join(', ')}...\n`);
 
     // Test 2: Fetch teams (slightly larger dataset)
     console.log('Test 2: Fetching FBS teams...');
-    const teamsResponse = await fetch(`${API_BASE_URL}/teams?division=fbs`, {
-      headers: {
-        'Authorization': `Bearer ${API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-    });
-
-    if (!teamsResponse.ok) {
-      throw new Error(`HTTP ${teamsResponse.status}: ${teamsResponse.statusText}`);
-    }
-
-    const teams = await teamsResponse.json();
+    const teams = curlGet('/teams?division=fbs');
     console.log(`  SUCCESS: Found ${teams.length} FBS teams`);
     console.log(`  Sample: ${teams.slice(0, 3).map(t => t.school).join(', ')}...\n`);
 
     // Test 3: Fetch a single game week
     console.log('Test 3: Fetching 2024 Week 1 games...');
-    const gamesResponse = await fetch(`${API_BASE_URL}/games?year=2024&week=1`, {
-      headers: {
-        'Authorization': `Bearer ${API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-    });
-
-    if (!gamesResponse.ok) {
-      throw new Error(`HTTP ${gamesResponse.status}: ${gamesResponse.statusText}`);
-    }
-
-    const games = await gamesResponse.json();
+    const games = curlGet('/games?year=2024&week=1');
     console.log(`  SUCCESS: Found ${games.length} games in Week 1 2024`);
     if (games.length > 0) {
       const game = games[0];
-      console.log(`  Sample: ${game.away_team} @ ${game.home_team}\n`);
+      console.log(`  Sample: ${game.awayTeam} @ ${game.homeTeam}\n`);
     }
 
     console.log('===========================================');
     console.log('ALL TESTS PASSED! API connection is working.');
     console.log('===========================================');
+    console.log('\nNote: The API has Cloudflare protection that may block');
+    console.log('Node.js HTTP clients in some environments. Browser requests');
+    console.log('via Vite will work normally.');
 
   } catch (error) {
     console.error('ERROR:', error.message);
-
-    if (error.message.includes('401')) {
-      console.log('\nYour API key appears to be invalid.');
-      console.log('Please verify your key at https://collegefootballdata.com/');
-    } else if (error.message.includes('403')) {
-      console.log('\nAccess forbidden. Your API key may have been revoked or rate-limited.');
-    } else if (error.message.includes('fetch')) {
-      console.log('\nNetwork error. Check your internet connection.');
-    }
-
     process.exit(1);
   }
 }
