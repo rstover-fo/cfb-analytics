@@ -10,7 +10,8 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "ingest:full": "node --env-file=.env scripts/ingest-data.js --full",
     "ingest:season": "node --env-file=.env scripts/ingest-data.js --season",
-    "ingest:weekly": "node --env-file=.env scripts/ingest-data.js --weekly"
+    "ingest:weekly": "node --env-file=.env scripts/ingest-data.js --weekly",
+    "import:csv": "node --env-file=.env scripts/import-csv.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.84.0",
