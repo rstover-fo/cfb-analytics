@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { BarChart3, Trophy, TrendingUp } from 'lucide-react'
 import { getTeamRecords, getConferences, TeamRecord } from '../services/api'
-import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip, BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts'
+import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts'
 
 const ConferenceComparison = () => {
   const [records, setRecords] = useState<TeamRecord[]>([])
@@ -146,7 +146,7 @@ const ConferenceComparison = () => {
                   formatter={(value: number) => `${value.toFixed(1)}%`}
                 />
                 <Bar dataKey="winPercentage" radius={[0, 8, 8, 0]}>
-                  {sortedStats.map((entry, index) => (
+                  {sortedStats.map((_, index) => (
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Bar>
@@ -170,7 +170,7 @@ const ConferenceComparison = () => {
                   outerRadius={120}
                   label={(entry) => `${entry.conference.split(' ')[0]}: ${entry.teams}`}
                 >
-                  {sortedStats.map((entry, index) => (
+                  {sortedStats.map((_, index) => (
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
