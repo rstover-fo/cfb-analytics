@@ -14,7 +14,7 @@ import { createClient } from '@supabase/supabase-js';
 import axios from 'axios';
 
 // Configuration
-const CFBD_API_URL = 'https://apinext.collegefootballdata.com';
+const CFBD_API_URL = 'https://api.collegefootballdata.com';
 const CFBD_API_KEY = process.env.VITE_CFB_API_KEY;
 const SUPABASE_URL = process.env.VITE_SUPABASE_URL;
 const SUPABASE_ANON_KEY = process.env.VITE_SUPABASE_ANON_KEY;
