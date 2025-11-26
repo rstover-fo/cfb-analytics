@@ -1,0 +1,1 @@
+aggregated team season statistics
