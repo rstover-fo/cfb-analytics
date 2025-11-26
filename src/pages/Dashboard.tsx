@@ -7,7 +7,7 @@ const Dashboard = () => {
   const [rankings, setRankings] = useState<RankingWeek[]>([])
   const [recentGames, setRecentGames] = useState<Game[]>([])
   const [loading, setLoading] = useState(true)
-  const currentYear = new Date().getFullYear()
+  const currentYear = 2024 // Default to 2024 for complete data
 
   useEffect(() => {
     const fetchData = async () => {

@@ -4,7 +4,7 @@ import { getGames, Game } from '../services/api'
 
 const LiveScores = () => {
   const [games, setGames] = useState<Game[]>([])
-  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear())
+  const [selectedYear, setSelectedYear] = useState(2024)
   const [selectedWeek, setSelectedWeek] = useState(1)
   const [loading, setLoading] = useState(true)
   const [lastUpdated, setLastUpdated] = useState(new Date())

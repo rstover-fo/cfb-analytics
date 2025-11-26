@@ -6,7 +6,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 const GameAnalytics = () => {
   const [games, setGames] = useState<Game[]>([])
   const [teams, setTeams] = useState<Team[]>([])
-  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear())
+  const [selectedYear, setSelectedYear] = useState(2024)
   const [selectedWeek, setSelectedWeek] = useState(1)
   const [selectedTeam, setSelectedTeam] = useState('')
   const [loading, setLoading] = useState(true)

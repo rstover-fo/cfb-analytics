@@ -5,7 +5,7 @@ import { getPlayerSeasonStats, getTeams, PlayerSeasonStat, Team } from '../servi
 const PlayerStats = () => {
   const [players, setPlayers] = useState<PlayerSeasonStat[]>([])
   const [teams, setTeams] = useState<Team[]>([])
-  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear())
+  const [selectedYear, setSelectedYear] = useState(2024)
   const [selectedCategory, setSelectedCategory] = useState('passing')
   const [selectedTeam, setSelectedTeam] = useState('')
   const [loading, setLoading] = useState(true)

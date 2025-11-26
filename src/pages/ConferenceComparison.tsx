@@ -6,7 +6,7 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, BarChart, Bar, XAxis
 const ConferenceComparison = () => {
   const [records, setRecords] = useState<TeamRecord[]>([])
   const [conferences, setConferences] = useState<string[]>([])
-  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear())
+  const [selectedYear, setSelectedYear] = useState(2024)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

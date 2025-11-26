@@ -6,7 +6,7 @@ import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, Responsive
 const AdvancedMetrics = () => {
   const [stats, setStats] = useState<AdvancedStat[]>([])
   const [teams, setTeams] = useState<Team[]>([])
-  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear())
+  const [selectedYear, setSelectedYear] = useState(2024)
   const [selectedTeam, setSelectedTeam] = useState('')
   const [metricView, setMetricView] = useState<'offense' | 'defense'>('offense')
   const [loading, setLoading] = useState(true)

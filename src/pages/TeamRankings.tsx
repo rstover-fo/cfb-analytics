@@ -6,7 +6,7 @@ const TeamRankings = () => {
   const [rankings, setRankings] = useState<RankingWeek[]>([])
   const [records, setRecords] = useState<TeamRecord[]>([])
   const [selectedPoll, setSelectedPoll] = useState('AP Top 25')
-  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear())
+  const [selectedYear, setSelectedYear] = useState(2024)
   const [selectedWeek, setSelectedWeek] = useState(1)
   const [loading, setLoading] = useState(true)
 
