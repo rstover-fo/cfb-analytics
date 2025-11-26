@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Activity, Calendar, MapPin, Users } from 'lucide-react'
 import { getGames, getTeams, Game, Team } from '../services/api'
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 
 const GameAnalytics = () => {
   const [games, setGames] = useState<Game[]>([])
@@ -32,9 +32,7 @@ const GameAnalytics = () => {
   const avgHomeScore = games.length > 0
     ? (games.reduce((sum, g) => sum + g.home_points, 0) / games.length).toFixed(1)
     : 0
-  const avgAwayScore = games.length > 0
-    ? (games.reduce((sum, g) => sum + g.away_points, 0) / games.length).toFixed(1)
-    : 0
+  // avgAwayScore available if needed: games.reduce((sum, g) => sum + g.away_points, 0) / games.length
   const upsets = games.filter(g => g.away_points > g.home_points).length
   const blowouts = games.filter(g => Math.abs(g.home_points - g.away_points) >= 21).length
 

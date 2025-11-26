@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { TrendingUp, Activity, Target, Zap } from 'lucide-react'
 import { getAdvancedStats, getTeams, AdvancedStat, Team } from '../services/api'
-import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, Cell } from 'recharts'
+import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts'
 
 const AdvancedMetrics = () => {
   const [stats, setStats] = useState<AdvancedStat[]>([])
