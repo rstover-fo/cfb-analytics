@@ -1,0 +1,224 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Core Query Functions > getAllGames > generates expected SQL query structure > getAllGames-count-sql 1`] = `
+"
+      SELECT COUNT(*) as total FROM games WHERE (home_team = 'Oklahoma' OR away_team = 'Oklahoma') AND season = 2024
+    "
+`;
+
+exports[`Core Query Functions > getAllGames > generates expected SQL query structure > getAllGames-select-sql 1`] = `
+"
+      SELECT
+        id,
+        season,
+        week,
+        season_type,
+        start_date,
+        venue,
+        home_team,
+        home_points,
+        away_team,
+        away_points,
+        completed
+      FROM games
+      WHERE (home_team = 'Oklahoma' OR away_team = 'Oklahoma') AND season = 2024
+      ORDER BY start_date DESC
+      LIMIT 10 OFFSET 20
+    "
+`;
+
+exports[`Core Query Functions > getAvailableSeasons > generates expected SQL query structure > getAvailableSeasons-sql 1`] = `
+"
+      SELECT DISTINCT season
+      FROM games
+      WHERE home_team = 'Oklahoma' OR away_team = 'Oklahoma'
+      ORDER BY season DESC
+    "
+`;
+
+exports[`Core Query Functions > getGameById > generates expected SQL query structure > getGameById-awayLineScores-sql 1`] = `undefined`;
+
+exports[`Core Query Functions > getGameById > generates expected SQL query structure > getGameById-homeLineScores-sql 1`] = `undefined`;
+
+exports[`Core Query Functions > getGameById > generates expected SQL query structure > getGameById-main-sql 1`] = `
+"
+      SELECT
+        id,
+        season,
+        week,
+        season_type,
+        start_date,
+        venue,
+        attendance,
+        home_team,
+        home_points,
+        home_conference,
+        away_team,
+        away_points,
+        away_conference,
+        excitement_index
+      FROM games
+      WHERE id = 1001
+    "
+`;
+
+exports[`Core Query Functions > getGameDrives > generates expected SQL query structure > getGameDrives-sql 1`] = `
+"
+      SELECT
+        id,
+        drive_number,
+        offense,
+        defense,
+        start_period,
+        start_yards_to_goal,
+        end_yards_to_goal,
+        plays,
+        yards,
+        drive_result,
+        scoring,
+        elapsed_minutes,
+        elapsed_seconds
+      FROM drives
+      WHERE game_id = 1001
+      ORDER BY drive_number
+    "
+`;
+
+exports[`Core Query Functions > getGamePlays > generates expected SQL query structure with search filter > getGamePlays-search-sql 1`] = `
+"
+      SELECT
+        id,
+        game_id,
+        drive_id,
+        drive_number,
+        play_number,
+        period,
+        clock_minutes,
+        clock_seconds,
+        offense,
+        defense,
+        offense_score,
+        defense_score,
+        down,
+        distance,
+        yards_gained,
+        play_type,
+        play_text,
+        ppa,
+        scoring
+      FROM plays
+      WHERE game_id = 1001 AND play_text ILIKE '%touchdown%' ESCAPE '\\'
+      ORDER BY drive_number, play_number
+    "
+`;
+
+exports[`Core Query Functions > getGamePlays > generates expected SQL query structure without filter > getGamePlays-nofilter-sql 1`] = `
+"
+      SELECT
+        id,
+        game_id,
+        drive_id,
+        drive_number,
+        play_number,
+        period,
+        clock_minutes,
+        clock_seconds,
+        offense,
+        defense,
+        offense_score,
+        defense_score,
+        down,
+        distance,
+        yards_gained,
+        play_type,
+        play_text,
+        ppa,
+        scoring
+      FROM plays
+      WHERE game_id = 1001
+      ORDER BY drive_number, play_number
+    "
+`;
+
+exports[`Core Query Functions > getRecentGames > generates expected SQL query structure > getRecentGames-sql 1`] = `
+"
+      SELECT
+        id,
+        season,
+        week,
+        season_type,
+        start_date,
+        venue,
+        home_team,
+        home_points,
+        away_team,
+        away_points
+      FROM games
+      WHERE (home_team = 'Oklahoma' OR away_team = 'Oklahoma')
+        AND season = 2024
+        AND completed = true
+      ORDER BY start_date DESC
+      LIMIT 5
+    "
+`;
+
+exports[`Core Query Functions > getSeasonRecord > generates expected SQL query structure > getSeasonRecord-sql 1`] = `
+"
+      SELECT
+        season,
+        COUNT(*) as games,
+        SUM(CASE
+          WHEN (home_team = 'Oklahoma' AND home_points > away_points)
+            OR (away_team = 'Oklahoma' AND away_points > home_points)
+          THEN 1 ELSE 0
+        END) as wins,
+        SUM(CASE
+          WHEN (home_team = 'Oklahoma' AND home_points < away_points)
+            OR (away_team = 'Oklahoma' AND away_points < home_points)
+          THEN 1 ELSE 0
+        END) as losses,
+        SUM(CASE
+          WHEN conference_game = true AND (
+            (home_team = 'Oklahoma' AND home_points > away_points)
+            OR (away_team = 'Oklahoma' AND away_points > home_points)
+          )
+          THEN 1 ELSE 0
+        END) as conf_wins,
+        SUM(CASE
+          WHEN conference_game = true AND (
+            (home_team = 'Oklahoma' AND home_points < away_points)
+            OR (away_team = 'Oklahoma' AND away_points < home_points)
+          )
+          THEN 1 ELSE 0
+        END) as conf_losses,
+        SUM(CASE WHEN home_team = 'Oklahoma' THEN home_points ELSE away_points END) as points_for,
+        SUM(CASE WHEN home_team = 'Oklahoma' THEN away_points ELSE home_points END) as points_against
+      FROM games
+      WHERE (home_team = 'Oklahoma' OR away_team = 'Oklahoma')
+        AND season = 2024
+        AND completed = true
+      GROUP BY season
+    "
+`;
+
+exports[`Core Query Functions > getUpcomingGames > generates expected SQL query structure > getUpcomingGames-sql 1`] = `
+"
+      SELECT
+        id,
+        season,
+        week,
+        season_type,
+        start_date,
+        venue,
+        home_team,
+        home_points,
+        away_team,
+        away_points
+      FROM games
+      WHERE (home_team = 'Oklahoma' OR away_team = 'Oklahoma')
+        AND season = 2024
+        AND (completed = false OR completed IS NULL)
+      ORDER BY start_date ASC
+      LIMIT 5
+    "
+`;
