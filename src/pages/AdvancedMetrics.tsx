@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { TrendingUp, Activity, Target, Zap } from 'lucide-react'
-import { getAdvancedStats, getTeams, AdvancedStat, Team } from '../services/api'
+import { getAdvancedStats, getTeams, AdvancedStat, Team, ApiError } from '../services/api'
 import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts'
+import ErrorState from '../components/ErrorState'
 
 const AdvancedMetrics = () => {
   const [stats, setStats] = useState<AdvancedStat[]>([])
@@ -10,20 +11,28 @@ const AdvancedMetrics = () => {
   const [selectedTeam, setSelectedTeam] = useState('')
   const [metricView, setMetricView] = useState<'offense' | 'defense'>('offense')
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<Error | ApiError | null>(null)
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true)
+  const fetchData = useCallback(async () => {
+    setLoading(true)
+    setError(null)
+    try {
       const [statsData, teamsData] = await Promise.all([
         getAdvancedStats(selectedYear, selectedTeam || undefined),
         getTeams(selectedYear)
       ])
       setStats(statsData.filter(s => s.offense && s.defense))
       setTeams(teamsData.sort((a, b) => a.school.localeCompare(b.school)))
+    } catch (err) {
+      setError(err instanceof Error ? err : new Error('Failed to load advanced metrics'))
+    } finally {
       setLoading(false)
     }
-    fetchData()
   }, [selectedYear, selectedTeam])
+
+  useEffect(() => {
+    fetchData()
+  }, [fetchData])
 
   const years = Array.from({ length: 10 }, (_, i) => new Date().getFullYear() - i)
 
@@ -89,6 +98,7 @@ const AdvancedMetrics = () => {
               id="metrics-season"
               value={selectedYear}
               onChange={(e) => setSelectedYear(Number(e.target.value))}
+              autoComplete="off"
               className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cfb-primary dark:focus-visible:ring-cfb-accent"
             >
               {years.map(year => (
@@ -105,6 +115,7 @@ const AdvancedMetrics = () => {
               id="metrics-team"
               value={selectedTeam}
               onChange={(e) => setSelectedTeam(e.target.value)}
+              autoComplete="off"
               className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cfb-primary dark:focus-visible:ring-cfb-accent"
             >
               <option value="">All Teams</option>
@@ -273,9 +284,14 @@ const AdvancedMetrics = () => {
                   </div>
                 </div>
               ))
+            ) : error ? (
+              <div className="p-6">
+                <ErrorState error={error} onRetry={fetchData} context="offensive metrics" />
+              </div>
             ) : (
               <div className="p-6 text-center text-gray-500 dark:text-gray-400">
-                No data available
+                <p className="mb-2">No offensive data available for {selectedYear}.</p>
+                <p className="text-sm">Advanced metrics may not be available for the current season. Try selecting a previous year.</p>
               </div>
             )}
           </div>
@@ -327,9 +343,14 @@ const AdvancedMetrics = () => {
                   </div>
                 </div>
               ))
+            ) : error ? (
+              <div className="p-6">
+                <ErrorState error={error} onRetry={fetchData} context="defensive metrics" />
+              </div>
             ) : (
               <div className="p-6 text-center text-gray-500 dark:text-gray-400">
-                No data available
+                <p className="mb-2">No defensive data available for {selectedYear}.</p>
+                <p className="text-sm">Advanced metrics may not be available for the current season. Try selecting a previous year.</p>
               </div>
             )}
           </div>

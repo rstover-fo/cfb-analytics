@@ -1,8 +1,71 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { supabase } from '../lib/supabase';
 
 const API_BASE_URL = 'https://api.collegefootballdata.com';
 const API_KEY = import.meta.env.VITE_CFB_API_KEY;
+
+// =====================
+// API Error Handling
+// =====================
+
+export class ApiError extends Error {
+  constructor(
+    message: string,
+    public code: 'NETWORK_ERROR' | 'NOT_FOUND' | 'RATE_LIMITED' | 'SERVER_ERROR' | 'UNKNOWN',
+    public retryable: boolean = false
+  ) {
+    super(message);
+    this.name = 'ApiError';
+  }
+}
+
+function handleApiError(error: unknown, context: string): never {
+  console.error(`Error in ${context}:`, error);
+
+  if (axios.isAxiosError(error)) {
+    const axiosError = error as AxiosError;
+
+    if (!axiosError.response) {
+      throw new ApiError(
+        'Unable to connect to the server. Please check your internet connection.',
+        'NETWORK_ERROR',
+        true
+      );
+    }
+
+    const status = axiosError.response.status;
+
+    if (status === 404) {
+      throw new ApiError(
+        'The requested data was not found.',
+        'NOT_FOUND',
+        false
+      );
+    }
+
+    if (status === 429) {
+      throw new ApiError(
+        'Too many requests. Please wait a moment and try again.',
+        'RATE_LIMITED',
+        true
+      );
+    }
+
+    if (status >= 500) {
+      throw new ApiError(
+        'The server is experiencing issues. Please try again later.',
+        'SERVER_ERROR',
+        true
+      );
+    }
+  }
+
+  throw new ApiError(
+    'An unexpected error occurred. Please try again.',
+    'UNKNOWN',
+    true
+  );
+}
 
 // Direct API client (fallback when Supabase has no data)
 const api = axios.create({
@@ -187,8 +250,8 @@ export const getTeams = async (year?: number): Promise<Team[]> => {
     const response = await api.get('/teams', { params });
     return response.data;
   } catch (error) {
-    console.error('Error fetching teams:', error);
-    return [];
+    if (error instanceof ApiError) throw error;
+    handleApiError(error, 'getTeams');
   }
 };
 
@@ -236,8 +299,8 @@ export const getTeamRecords = async (year: number, team?: string): Promise<TeamR
     const response = await api.get('/records', { params });
     return response.data;
   } catch (error) {
-    console.error('Error fetching team records:', error);
-    return [];
+    if (error instanceof ApiError) throw error;
+    handleApiError(error, 'getTeamRecords');
   }
 };
 
@@ -288,8 +351,8 @@ export const getGames = async (year: number, week?: number, team?: string): Prom
     const response = await api.get('/games', { params });
     return response.data;
   } catch (error) {
-    console.error('Error fetching games:', error);
-    return [];
+    if (error instanceof ApiError) throw error;
+    handleApiError(error, 'getGames');
   }
 };
 
@@ -349,8 +412,8 @@ export const getRankings = async (year: number, week?: number): Promise<RankingW
     const response = await api.get('/rankings', { params });
     return response.data;
   } catch (error) {
-    console.error('Error fetching rankings:', error);
-    return [];
+    if (error instanceof ApiError) throw error;
+    handleApiError(error, 'getRankings');
   }
 };
 
@@ -398,8 +461,8 @@ export const getPlayerSeasonStats = async (
     const response = await api.get('/stats/player/season', { params });
     return response.data;
   } catch (error) {
-    console.error('Error fetching player stats:', error);
-    return [];
+    if (error instanceof ApiError) throw error;
+    handleApiError(error, 'getPlayerSeasonStats');
   }
 };
 
@@ -410,8 +473,8 @@ export const getTeamStats = async (year: number, team?: string): Promise<TeamSta
     const response = await api.get('/stats/season', { params });
     return response.data;
   } catch (error) {
-    console.error('Error fetching team stats:', error);
-    return [];
+    if (error instanceof ApiError) throw error;
+    handleApiError(error, 'getTeamStats');
   }
 };
 
@@ -472,8 +535,8 @@ export const getAdvancedStats = async (year: number, team?: string): Promise<Adv
     const response = await api.get('/stats/season/advanced', { params });
     return response.data;
   } catch (error) {
-    console.error('Error fetching advanced stats:', error);
-    return [];
+    if (error instanceof ApiError) throw error;
+    handleApiError(error, 'getAdvancedStats');
   }
 };
 
@@ -496,8 +559,8 @@ export const getConferences = async (): Promise<string[]> => {
     const response = await api.get('/conferences');
     return response.data.map((conf: { name: string }) => conf.name);
   } catch (error) {
-    console.error('Error fetching conferences:', error);
-    return [];
+    if (error instanceof ApiError) throw error;
+    handleApiError(error, 'getConferences');
   }
 };
 

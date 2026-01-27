@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { Trophy, TrendingUp } from 'lucide-react'
-import { getRankings, getTeamRecords, RankingWeek, TeamRecord } from '../services/api'
+import { getRankings, getTeamRecords, RankingWeek, TeamRecord, ApiError } from '../services/api'
+import ErrorState from '../components/ErrorState'
 
 const TeamRankings = () => {
   const [rankings, setRankings] = useState<RankingWeek[]>([])
@@ -9,20 +10,28 @@ const TeamRankings = () => {
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear())
   const [selectedWeek, setSelectedWeek] = useState(1)
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<Error | ApiError | null>(null)
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true)
+  const fetchData = useCallback(async () => {
+    setLoading(true)
+    setError(null)
+    try {
       const [rankingsData, recordsData] = await Promise.all([
         getRankings(selectedYear, selectedWeek),
         getTeamRecords(selectedYear)
       ])
       setRankings(rankingsData)
       setRecords(recordsData)
+    } catch (err) {
+      setError(err instanceof Error ? err : new Error('Failed to load rankings'))
+    } finally {
       setLoading(false)
     }
-    fetchData()
   }, [selectedYear, selectedWeek])
+
+  useEffect(() => {
+    fetchData()
+  }, [fetchData])
 
   const currentRanks = rankings[0]?.polls.find(poll => poll.poll === selectedPoll)?.ranks || []
 
@@ -56,6 +65,7 @@ const TeamRankings = () => {
               id="rankings-season"
               value={selectedYear}
               onChange={(e) => setSelectedYear(Number(e.target.value))}
+              autoComplete="off"
               className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cfb-primary dark:focus-visible:ring-cfb-accent"
             >
               {years.map(year => (
@@ -72,6 +82,7 @@ const TeamRankings = () => {
               id="rankings-week"
               value={selectedWeek}
               onChange={(e) => setSelectedWeek(Number(e.target.value))}
+              autoComplete="off"
               className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cfb-primary dark:focus-visible:ring-cfb-accent"
             >
               {weeks.map(week => (
@@ -88,6 +99,7 @@ const TeamRankings = () => {
               id="rankings-poll"
               value={selectedPoll}
               onChange={(e) => setSelectedPoll(e.target.value)}
+              autoComplete="off"
               className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cfb-primary dark:focus-visible:ring-cfb-accent"
             >
               {polls.map(poll => (
@@ -181,7 +193,14 @@ const TeamRankings = () => {
               ) : (
                 <tr>
                   <td colSpan={6} className="px-6 py-8 text-center text-gray-500 dark:text-gray-400">
-                    No ranking data available for the selected week
+                    {error ? (
+                      <ErrorState error={error} onRetry={fetchData} context="rankings" />
+                    ) : (
+                      <div>
+                        <p className="mb-2">No ranking data available for Week {selectedWeek}, {selectedYear}.</p>
+                        <p className="text-sm">Rankings are typically released starting Week 1 of the season. Try selecting a different week or year.</p>
+                      </div>
+                    )}
                   </td>
                 </tr>
               )}

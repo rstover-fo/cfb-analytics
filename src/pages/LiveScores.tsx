@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { Clock, Calendar, MapPin, Users, RefreshCw } from 'lucide-react'
-import { getGames, Game } from '../services/api'
+import { getGames, Game, ApiError } from '../services/api'
+import ErrorState from '../components/ErrorState'
 
 const LiveScores = () => {
   const [games, setGames] = useState<Game[]>([])
@@ -8,22 +9,29 @@ const LiveScores = () => {
   const [selectedWeek, setSelectedWeek] = useState(1)
   const [loading, setLoading] = useState(true)
   const [lastUpdated, setLastUpdated] = useState(new Date())
+  const [error, setError] = useState<Error | ApiError | null>(null)
 
-  const fetchGames = async () => {
+  const fetchGames = useCallback(async () => {
     setLoading(true)
-    const gamesData = await getGames(selectedYear, selectedWeek)
-    // Sort games by date
-    const sortedGames = gamesData.sort((a, b) =>
-      new Date(a.start_date).getTime() - new Date(b.start_date).getTime()
-    )
-    setGames(sortedGames)
-    setLastUpdated(new Date())
-    setLoading(false)
-  }
+    setError(null)
+    try {
+      const gamesData = await getGames(selectedYear, selectedWeek)
+      // Sort games by date
+      const sortedGames = gamesData.sort((a, b) =>
+        new Date(a.start_date).getTime() - new Date(b.start_date).getTime()
+      )
+      setGames(sortedGames)
+      setLastUpdated(new Date())
+    } catch (err) {
+      setError(err instanceof Error ? err : new Error('Failed to load scores'))
+    } finally {
+      setLoading(false)
+    }
+  }, [selectedYear, selectedWeek])
 
   useEffect(() => {
     fetchGames()
-  }, [selectedYear, selectedWeek])
+  }, [fetchGames])
 
   const years = Array.from({ length: 10 }, (_, i) => new Date().getFullYear() - i)
   const weeks = Array.from({ length: 15 }, (_, i) => i + 1)
@@ -91,6 +99,7 @@ const LiveScores = () => {
               id="scores-season"
               value={selectedYear}
               onChange={(e) => setSelectedYear(Number(e.target.value))}
+              autoComplete="off"
               className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cfb-primary dark:focus-visible:ring-cfb-accent"
             >
               {years.map(year => (
@@ -107,6 +116,7 @@ const LiveScores = () => {
               id="scores-week"
               value={selectedWeek}
               onChange={(e) => setSelectedWeek(Number(e.target.value))}
+              autoComplete="off"
               className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cfb-primary dark:focus-visible:ring-cfb-accent"
             >
               {weeks.map(week => (
@@ -303,11 +313,16 @@ const LiveScores = () => {
             </div>
           ))}
         </div>
+      ) : error ? (
+        <ErrorState error={error} onRetry={fetchGames} context="scores" />
       ) : (
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md p-12 text-center">
           <Calendar className="w-16 h-16 text-gray-400 mx-auto mb-4" aria-hidden="true" />
-          <p className="text-gray-500 dark:text-gray-400">
-            No games found for Week {selectedWeek} of the {selectedYear} season
+          <p className="text-gray-500 dark:text-gray-400 mb-2">
+            No games found for Week {selectedWeek} of the {selectedYear} season.
+          </p>
+          <p className="text-sm text-gray-400 dark:text-gray-500">
+            The schedule may not be available yet. Try selecting a different week or a completed season.
           </p>
         </div>
       )}

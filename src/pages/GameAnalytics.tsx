@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { Activity, Calendar, MapPin, Users } from 'lucide-react'
-import { getGames, getTeams, Game, Team } from '../services/api'
+import { getGames, getTeams, Game, Team, ApiError } from '../services/api'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
+import ErrorState from '../components/ErrorState'
 
 const GameAnalytics = () => {
   const [games, setGames] = useState<Game[]>([])
@@ -10,20 +11,28 @@ const GameAnalytics = () => {
   const [selectedWeek, setSelectedWeek] = useState(1)
   const [selectedTeam, setSelectedTeam] = useState('')
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<Error | ApiError | null>(null)
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true)
+  const fetchData = useCallback(async () => {
+    setLoading(true)
+    setError(null)
+    try {
       const [gamesData, teamsData] = await Promise.all([
         getGames(selectedYear, selectedWeek, selectedTeam || undefined),
         getTeams(selectedYear)
       ])
       setGames(gamesData)
       setTeams(teamsData.sort((a, b) => a.school.localeCompare(b.school)))
+    } catch (err) {
+      setError(err instanceof Error ? err : new Error('Failed to load games'))
+    } finally {
       setLoading(false)
     }
-    fetchData()
   }, [selectedYear, selectedWeek, selectedTeam])
+
+  useEffect(() => {
+    fetchData()
+  }, [fetchData])
 
   const years = Array.from({ length: 10 }, (_, i) => new Date().getFullYear() - i)
   const weeks = Array.from({ length: 15 }, (_, i) => i + 1)
@@ -77,6 +86,7 @@ const GameAnalytics = () => {
               id="games-season"
               value={selectedYear}
               onChange={(e) => setSelectedYear(Number(e.target.value))}
+              autoComplete="off"
               className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cfb-primary dark:focus-visible:ring-cfb-accent"
             >
               {years.map(year => (
@@ -93,6 +103,7 @@ const GameAnalytics = () => {
               id="games-week"
               value={selectedWeek}
               onChange={(e) => setSelectedWeek(Number(e.target.value))}
+              autoComplete="off"
               className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cfb-primary dark:focus-visible:ring-cfb-accent"
             >
               {weeks.map(week => (
@@ -109,6 +120,7 @@ const GameAnalytics = () => {
               id="games-team"
               value={selectedTeam}
               onChange={(e) => setSelectedTeam(e.target.value)}
+              autoComplete="off"
               className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cfb-primary dark:focus-visible:ring-cfb-accent"
             >
               <option value="">All Teams</option>
@@ -277,9 +289,14 @@ const GameAnalytics = () => {
                 </div>
               </div>
             ))
+          ) : error ? (
+            <div className="p-6">
+              <ErrorState error={error} onRetry={fetchData} context="games" />
+            </div>
           ) : (
             <div className="p-6 text-center text-gray-500 dark:text-gray-400">
-              No games found for the selected filters
+              <p className="mb-2">No games found for Week {selectedWeek}, {selectedYear}.</p>
+              <p className="text-sm">Games may not be scheduled for this week yet. Try selecting a different week or a past season.</p>
             </div>
           )}
         </div>

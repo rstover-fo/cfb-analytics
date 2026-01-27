@@ -1,27 +1,36 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { BarChart3, Trophy, TrendingUp } from 'lucide-react'
-import { getTeamRecords, getConferences, TeamRecord } from '../services/api'
+import { getTeamRecords, getConferences, TeamRecord, ApiError } from '../services/api'
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts'
+import ErrorState from '../components/ErrorState'
 
 const ConferenceComparison = () => {
   const [records, setRecords] = useState<TeamRecord[]>([])
   const [conferences, setConferences] = useState<string[]>([])
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear())
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<Error | ApiError | null>(null)
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true)
+  const fetchData = useCallback(async () => {
+    setLoading(true)
+    setError(null)
+    try {
       const [recordsData, conferencesData] = await Promise.all([
         getTeamRecords(selectedYear),
         getConferences()
       ])
       setRecords(recordsData)
       setConferences(conferencesData.filter(c => c !== 'FBS Independents'))
+    } catch (err) {
+      setError(err instanceof Error ? err : new Error('Failed to load conference data'))
+    } finally {
       setLoading(false)
     }
-    fetchData()
   }, [selectedYear])
+
+  useEffect(() => {
+    fetchData()
+  }, [fetchData])
 
   const years = Array.from({ length: 10 }, (_, i) => new Date().getFullYear() - i)
 
@@ -69,6 +78,7 @@ const ConferenceComparison = () => {
             id="conference-season"
             value={selectedYear}
             onChange={(e) => setSelectedYear(Number(e.target.value))}
+            autoComplete="off"
             className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cfb-primary dark:focus-visible:ring-cfb-accent"
           >
             {years.map(year => (
@@ -281,7 +291,14 @@ const ConferenceComparison = () => {
               ) : (
                 <tr>
                   <td colSpan={7} className="px-6 py-8 text-center text-gray-500 dark:text-gray-400">
-                    No conference data available
+                    {error ? (
+                      <ErrorState error={error} onRetry={fetchData} context="conference data" />
+                    ) : (
+                      <div>
+                        <p className="mb-2">No conference data available for {selectedYear}.</p>
+                        <p className="text-sm">Try selecting a previous season to view historical conference statistics.</p>
+                      </div>
+                    )}
                   </td>
                 </tr>
               )}

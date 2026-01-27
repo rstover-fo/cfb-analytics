@@ -1,31 +1,55 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { Trophy, TrendingUp, Users, Activity } from 'lucide-react'
-import { getRankings, getGames, RankingWeek, Game } from '../services/api'
+import { getRankings, getGames, RankingWeek, Game, ApiError } from '../services/api'
 import { Link } from 'react-router-dom'
+import ErrorState from '../components/ErrorState'
 
 const Dashboard = () => {
   const [rankings, setRankings] = useState<RankingWeek[]>([])
   const [recentGames, setRecentGames] = useState<Game[]>([])
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<Error | ApiError | null>(null)
   const currentYear = new Date().getFullYear()
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true)
+  const fetchData = useCallback(async () => {
+    setLoading(true)
+    setError(null)
+    try {
       const [rankingsData, gamesData] = await Promise.all([
         getRankings(currentYear, 1),
         getGames(currentYear)
       ])
       setRankings(rankingsData)
       setRecentGames(gamesData.slice(0, 10))
+    } catch (err) {
+      setError(err instanceof Error ? err : new Error('Failed to load data'))
+    } finally {
       setLoading(false)
     }
+  }, [currentYear])
+
+  useEffect(() => {
     fetchData()
-  }, [])
+  }, [fetchData])
 
   const topRanks = rankings[0]?.polls
     .find(poll => poll.poll === 'AP Top 25')
     ?.ranks.slice(0, 5) || []
+
+  if (error) {
+    return (
+      <div className="space-y-8">
+        {/* Welcome Section */}
+        <div className="bg-gradient-to-r from-cfb-primary to-blue-700 dark:from-gray-800 dark:to-gray-700 rounded-xl p-8 text-white">
+          <h2 className="text-3xl font-bold mb-2">Welcome to CFB Analytics</h2>
+          <p className="text-blue-100 dark:text-gray-300">
+            Your comprehensive platform for college football data analysis and insights
+          </p>
+        </div>
+        <ErrorState error={error} onRetry={fetchData} context="dashboard data" />
+      </div>
+    )
+  }
 
   return (
     <div className="space-y-8">
