@@ -81,7 +81,7 @@ const PlayerStats = () => {
               id="players-season"
               value={selectedYear}
               onChange={(e) => setSelectedYear(Number(e.target.value))}
-              className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-cfb-primary"
+              className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cfb-primary dark:focus-visible:ring-cfb-accent"
             >
               {years.map(year => (
                 <option key={year} value={year}>{year}</option>
@@ -97,7 +97,7 @@ const PlayerStats = () => {
               id="players-category"
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-cfb-primary"
+              className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cfb-primary dark:focus-visible:ring-cfb-accent"
             >
               {categories.map(cat => (
                 <option key={cat.value} value={cat.value}>{cat.label}</option>
@@ -113,7 +113,7 @@ const PlayerStats = () => {
               id="players-team"
               value={selectedTeam}
               onChange={(e) => setSelectedTeam(e.target.value)}
-              className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-cfb-primary"
+              className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cfb-primary dark:focus-visible:ring-cfb-accent"
             >
               <option value="">All Teams</option>
               {teams.map(team => (

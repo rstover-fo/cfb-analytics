@@ -47,7 +47,7 @@ const Layout = ({ children, darkMode, toggleDarkMode }: LayoutProps) => {
             </div>
             <button
               onClick={toggleDarkMode}
-              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+              className="p-3 min-w-[44px] min-h-[44px] rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cfb-primary dark:focus-visible:ring-cfb-accent focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-800"
               aria-label="Toggle dark mode"
             >
               {darkMode ? (
@@ -63,7 +63,7 @@ const Layout = ({ children, darkMode, toggleDarkMode }: LayoutProps) => {
       {/* Navigation */}
       <nav className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-[76px] z-40">
         <div className="container mx-auto px-4">
-          <div className="flex space-x-1 overflow-x-auto scrollbar-hide">
+          <div className="flex space-x-1 overflow-x-auto scrollbar-hide overscroll-x-contain">
             {navItems.map((item) => {
               const Icon = item.icon
               const isActive = location.pathname === item.path
@@ -71,7 +71,7 @@ const Layout = ({ children, darkMode, toggleDarkMode }: LayoutProps) => {
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={`flex items-center space-x-2 px-4 py-3 whitespace-nowrap border-b-2 transition-colors ${
+                  className={`flex items-center space-x-2 px-4 py-3 min-h-[44px] whitespace-nowrap border-b-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-cfb-primary dark:focus-visible:ring-cfb-accent ${
                     isActive
                       ? 'border-cfb-primary text-cfb-primary dark:text-cfb-accent'
                       : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'

@@ -73,7 +73,7 @@ const LiveScores = () => {
         <button
           onClick={fetchGames}
           disabled={loading}
-          className="flex items-center space-x-2 px-4 py-2 bg-cfb-primary hover:bg-blue-700 text-white rounded-lg transition-colors disabled:opacity-50"
+          className="flex items-center justify-center space-x-2 px-4 py-2 min-h-[44px] bg-cfb-primary hover:bg-blue-700 text-white rounded-lg transition-colors disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cfb-primary focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-900"
         >
           <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} aria-hidden="true" />
           <span>Refresh</span>
@@ -91,7 +91,7 @@ const LiveScores = () => {
               id="scores-season"
               value={selectedYear}
               onChange={(e) => setSelectedYear(Number(e.target.value))}
-              className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-cfb-primary"
+              className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cfb-primary dark:focus-visible:ring-cfb-accent"
             >
               {years.map(year => (
                 <option key={year} value={year}>{year}</option>
@@ -107,7 +107,7 @@ const LiveScores = () => {
               id="scores-week"
               value={selectedWeek}
               onChange={(e) => setSelectedWeek(Number(e.target.value))}
-              className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-cfb-primary"
+              className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cfb-primary dark:focus-visible:ring-cfb-accent"
             >
               {weeks.map(week => (
                 <option key={week} value={week}>Week {week}</option>

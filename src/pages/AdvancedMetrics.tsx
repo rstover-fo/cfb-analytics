@@ -89,7 +89,7 @@ const AdvancedMetrics = () => {
               id="metrics-season"
               value={selectedYear}
               onChange={(e) => setSelectedYear(Number(e.target.value))}
-              className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-cfb-primary"
+              className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cfb-primary dark:focus-visible:ring-cfb-accent"
             >
               {years.map(year => (
                 <option key={year} value={year}>{year}</option>
@@ -105,7 +105,7 @@ const AdvancedMetrics = () => {
               id="metrics-team"
               value={selectedTeam}
               onChange={(e) => setSelectedTeam(e.target.value)}
-              className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-cfb-primary"
+              className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cfb-primary dark:focus-visible:ring-cfb-accent"
             >
               <option value="">All Teams</option>
               {teams.map(team => (
@@ -122,7 +122,7 @@ const AdvancedMetrics = () => {
               <button
                 onClick={() => setMetricView('offense')}
                 aria-pressed={metricView === 'offense'}
-                className={`flex-1 px-4 py-2 rounded-lg font-medium transition-colors ${
+                className={`flex-1 px-4 py-2 min-h-[44px] rounded-lg font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cfb-primary dark:focus-visible:ring-cfb-accent focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-800 ${
                   metricView === 'offense'
                     ? 'bg-cfb-primary text-white'
                     : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
@@ -133,7 +133,7 @@ const AdvancedMetrics = () => {
               <button
                 onClick={() => setMetricView('defense')}
                 aria-pressed={metricView === 'defense'}
-                className={`flex-1 px-4 py-2 rounded-lg font-medium transition-colors ${
+                className={`flex-1 px-4 py-2 min-h-[44px] rounded-lg font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cfb-primary dark:focus-visible:ring-cfb-accent focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-800 ${
                   metricView === 'defense'
                     ? 'bg-cfb-primary text-white'
                     : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
