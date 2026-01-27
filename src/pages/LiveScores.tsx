@@ -75,7 +75,7 @@ const LiveScores = () => {
           disabled={loading}
           className="flex items-center space-x-2 px-4 py-2 bg-cfb-primary hover:bg-blue-700 text-white rounded-lg transition-colors disabled:opacity-50"
         >
-          <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
+          <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} aria-hidden="true" />
           <span>Refresh</span>
         </button>
       </div>
@@ -84,10 +84,11 @@ const LiveScores = () => {
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label htmlFor="scores-season" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Season
             </label>
             <select
+              id="scores-season"
               value={selectedYear}
               onChange={(e) => setSelectedYear(Number(e.target.value))}
               className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-cfb-primary"
@@ -99,10 +100,11 @@ const LiveScores = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label htmlFor="scores-week" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Week
             </label>
             <select
+              id="scores-week"
               value={selectedWeek}
               onChange={(e) => setSelectedWeek(Number(e.target.value))}
               className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-cfb-primary"
@@ -115,7 +117,7 @@ const LiveScores = () => {
         </div>
 
         <div className="mt-4 flex items-center text-sm text-gray-500 dark:text-gray-400">
-          <Clock className="w-4 h-4 mr-1" />
+          <Clock className="w-4 h-4 mr-1" aria-hidden="true" />
           Last updated: {lastUpdated.toLocaleTimeString()}
         </div>
       </div>
@@ -125,7 +127,7 @@ const LiveScores = () => {
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
           <div className="flex items-center space-x-3">
             <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
-              <Calendar className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+              <Calendar className="w-6 h-6 text-blue-600 dark:text-blue-400" aria-hidden="true" />
             </div>
             <div>
               <p className="text-sm text-gray-500 dark:text-gray-400">Total Games</p>
@@ -137,7 +139,7 @@ const LiveScores = () => {
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
           <div className="flex items-center space-x-3">
             <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
-              <Clock className="w-6 h-6 text-green-600 dark:text-green-400" />
+              <Clock className="w-6 h-6 text-green-600 dark:text-green-400" aria-hidden="true" />
             </div>
             <div>
               <p className="text-sm text-gray-500 dark:text-gray-400">Completed</p>
@@ -151,7 +153,7 @@ const LiveScores = () => {
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
           <div className="flex items-center space-x-3">
             <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center">
-              <Calendar className="w-6 h-6 text-orange-600 dark:text-orange-400" />
+              <Calendar className="w-6 h-6 text-orange-600 dark:text-orange-400" aria-hidden="true" />
             </div>
             <div>
               <p className="text-sm text-gray-500 dark:text-gray-400">Upcoming</p>
@@ -165,7 +167,7 @@ const LiveScores = () => {
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
           <div className="flex items-center space-x-3">
             <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center">
-              <Users className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+              <Users className="w-6 h-6 text-purple-600 dark:text-purple-400" aria-hidden="true" />
             </div>
             <div>
               <p className="text-sm text-gray-500 dark:text-gray-400">Avg Attendance</p>
@@ -202,7 +204,7 @@ const LiveScores = () => {
             <div key={date} className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
               <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700">
                 <h3 className="text-lg font-bold text-gray-900 dark:text-white flex items-center">
-                  <Calendar className="w-5 h-5 mr-2" />
+                  <Calendar className="w-5 h-5 mr-2" aria-hidden="true" />
                   {date}
                 </h3>
               </div>
@@ -277,18 +279,18 @@ const LiveScores = () => {
                             {getGameStatus(game)}
                           </div>
                           <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
-                            <MapPin className="w-4 h-4 mr-1" />
+                            <MapPin className="w-4 h-4 mr-1" aria-hidden="true" />
                             <span className="truncate">{game.venue}</span>
                           </div>
                           {game.attendance && (
                             <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
-                              <Users className="w-4 h-4 mr-1" />
+                              <Users className="w-4 h-4 mr-1" aria-hidden="true" />
                               {game.attendance.toLocaleString()} attendance
                             </div>
                           )}
                           {game.excitement_index && (
                             <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
-                              <Clock className="w-4 h-4 mr-1" />
+                              <Clock className="w-4 h-4 mr-1" aria-hidden="true" />
                               Excitement: {game.excitement_index.toFixed(2)}
                             </div>
                           )}
@@ -303,7 +305,7 @@ const LiveScores = () => {
         </div>
       ) : (
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-12 text-center">
-          <Calendar className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+          <Calendar className="w-16 h-16 text-gray-400 mx-auto mb-4" aria-hidden="true" />
           <p className="text-gray-500 dark:text-gray-400">
             No games found for Week {selectedWeek} of the {selectedYear} season
           </p>

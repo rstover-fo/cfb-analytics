@@ -47,7 +47,7 @@ const Dashboard = () => {
                 <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">Top 25</p>
               </div>
               <div className="bg-cfb-primary/10 dark:bg-cfb-accent/10 p-3 rounded-lg">
-                <Trophy className="w-6 h-6 text-cfb-primary dark:text-cfb-accent" />
+                <Trophy className="w-6 h-6 text-cfb-primary dark:text-cfb-accent" aria-hidden="true" />
               </div>
             </div>
           </div>
@@ -61,7 +61,7 @@ const Dashboard = () => {
                 <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">In-Depth</p>
               </div>
               <div className="bg-green-100 dark:bg-green-900/30 p-3 rounded-lg">
-                <Activity className="w-6 h-6 text-green-600 dark:text-green-400" />
+                <Activity className="w-6 h-6 text-green-600 dark:text-green-400" aria-hidden="true" />
               </div>
             </div>
           </div>
@@ -75,7 +75,7 @@ const Dashboard = () => {
                 <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">Leaders</p>
               </div>
               <div className="bg-purple-100 dark:bg-purple-900/30 p-3 rounded-lg">
-                <Users className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+                <Users className="w-6 h-6 text-purple-600 dark:text-purple-400" aria-hidden="true" />
               </div>
             </div>
           </div>
@@ -89,7 +89,7 @@ const Dashboard = () => {
                 <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">EPA, SR</p>
               </div>
               <div className="bg-orange-100 dark:bg-orange-900/30 p-3 rounded-lg">
-                <TrendingUp className="w-6 h-6 text-orange-600 dark:text-orange-400" />
+                <TrendingUp className="w-6 h-6 text-orange-600 dark:text-orange-400" aria-hidden="true" />
               </div>
             </div>
           </div>
@@ -101,7 +101,7 @@ const Dashboard = () => {
         {/* Top 5 Rankings */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white">Top 5 Rankings</h3>
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white">Top 5 Rankings</h2>
             <Link to="/rankings" className="text-sm text-cfb-primary dark:text-cfb-accent hover:underline">
               View All
             </Link>
@@ -141,7 +141,7 @@ const Dashboard = () => {
         {/* Recent Games */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white">Recent Games</h3>
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white">Recent Games</h2>
             <Link to="/scores" className="text-sm text-cfb-primary dark:text-cfb-accent hover:underline">
               View All
             </Link>
@@ -193,7 +193,7 @@ const Dashboard = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
           <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4">
-            <Trophy className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+            <Trophy className="w-6 h-6 text-blue-600 dark:text-blue-400" aria-hidden="true" />
           </div>
           <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
             Comprehensive Rankings
@@ -205,7 +205,7 @@ const Dashboard = () => {
 
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
           <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-4">
-            <TrendingUp className="w-6 h-6 text-green-600 dark:text-green-400" />
+            <TrendingUp className="w-6 h-6 text-green-600 dark:text-green-400" aria-hidden="true" />
           </div>
           <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
             Advanced Metrics
@@ -217,7 +217,7 @@ const Dashboard = () => {
 
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
           <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mb-4">
-            <Activity className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+            <Activity className="w-6 h-6 text-purple-600 dark:text-purple-400" aria-hidden="true" />
           </div>
           <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
             Game-by-Game Analysis

@@ -70,10 +70,11 @@ const GameAnalytics = () => {
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label htmlFor="games-season" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Season
             </label>
             <select
+              id="games-season"
               value={selectedYear}
               onChange={(e) => setSelectedYear(Number(e.target.value))}
               className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-cfb-primary"
@@ -85,10 +86,11 @@ const GameAnalytics = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label htmlFor="games-week" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Week
             </label>
             <select
+              id="games-week"
               value={selectedWeek}
               onChange={(e) => setSelectedWeek(Number(e.target.value))}
               className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-cfb-primary"
@@ -100,10 +102,11 @@ const GameAnalytics = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label htmlFor="games-team" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Team (Optional)
             </label>
             <select
+              id="games-team"
               value={selectedTeam}
               onChange={(e) => setSelectedTeam(e.target.value)}
               className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-cfb-primary"
@@ -122,7 +125,7 @@ const GameAnalytics = () => {
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
           <div className="flex items-center space-x-3">
             <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
-              <Activity className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+              <Activity className="w-6 h-6 text-blue-600 dark:text-blue-400" aria-hidden="true" />
             </div>
             <div>
               <p className="text-sm text-gray-500 dark:text-gray-400">Total Games</p>
@@ -134,7 +137,7 @@ const GameAnalytics = () => {
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
           <div className="flex items-center space-x-3">
             <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
-              <Activity className="w-6 h-6 text-green-600 dark:text-green-400" />
+              <Activity className="w-6 h-6 text-green-600 dark:text-green-400" aria-hidden="true" />
             </div>
             <div>
               <p className="text-sm text-gray-500 dark:text-gray-400">Avg Home Score</p>
@@ -146,7 +149,7 @@ const GameAnalytics = () => {
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
           <div className="flex items-center space-x-3">
             <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center">
-              <Activity className="w-6 h-6 text-orange-600 dark:text-orange-400" />
+              <Activity className="w-6 h-6 text-orange-600 dark:text-orange-400" aria-hidden="true" />
             </div>
             <div>
               <p className="text-sm text-gray-500 dark:text-gray-400">Road Wins</p>
@@ -158,7 +161,7 @@ const GameAnalytics = () => {
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
           <div className="flex items-center space-x-3">
             <div className="w-12 h-12 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center">
-              <Activity className="w-6 h-6 text-red-600 dark:text-red-400" />
+              <Activity className="w-6 h-6 text-red-600 dark:text-red-400" aria-hidden="true" />
             </div>
             <div>
               <p className="text-sm text-gray-500 dark:text-gray-400">Blowouts (21+)</p>
@@ -257,16 +260,16 @@ const GameAnalytics = () => {
                   </div>
                   <div className="mt-4 md:mt-0 md:ml-6 flex flex-col items-start md:items-end space-y-1">
                     <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
-                      <Calendar className="w-4 h-4 mr-1" />
+                      <Calendar className="w-4 h-4 mr-1" aria-hidden="true" />
                       {new Date(game.start_date).toLocaleDateString()}
                     </div>
                     <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
-                      <MapPin className="w-4 h-4 mr-1" />
+                      <MapPin className="w-4 h-4 mr-1" aria-hidden="true" />
                       {game.venue}
                     </div>
                     {game.attendance && (
                       <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
-                        <Users className="w-4 h-4 mr-1" />
+                        <Users className="w-4 h-4 mr-1" aria-hidden="true" />
                         {game.attendance.toLocaleString()}
                       </div>
                     )}

@@ -62,10 +62,11 @@ const ConferenceComparison = () => {
       {/* Year Filter */}
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
         <div className="max-w-xs">
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label htmlFor="conference-season" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Season
           </label>
           <select
+            id="conference-season"
             value={selectedYear}
             onChange={(e) => setSelectedYear(Number(e.target.value))}
             className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-cfb-primary"
@@ -83,7 +84,7 @@ const ConferenceComparison = () => {
           <div className="bg-gradient-to-br from-yellow-500 to-yellow-700 rounded-lg shadow-md p-6 text-white">
             <div className="flex items-center space-x-3 mb-4">
               <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
-                <Trophy className="w-6 h-6" />
+                <Trophy className="w-6 h-6" aria-hidden="true" />
               </div>
               <div>
                 <p className="text-sm text-yellow-100">Top Conference</p>
@@ -96,7 +97,7 @@ const ConferenceComparison = () => {
           <div className="bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg shadow-md p-6 text-white">
             <div className="flex items-center space-x-3 mb-4">
               <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
-                <BarChart3 className="w-6 h-6" />
+                <BarChart3 className="w-6 h-6" aria-hidden="true" />
               </div>
               <div>
                 <p className="text-sm text-blue-100">Total Conferences</p>
@@ -109,7 +110,7 @@ const ConferenceComparison = () => {
           <div className="bg-gradient-to-br from-green-500 to-green-700 rounded-lg shadow-md p-6 text-white">
             <div className="flex items-center space-x-3 mb-4">
               <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
-                <TrendingUp className="w-6 h-6" />
+                <TrendingUp className="w-6 h-6" aria-hidden="true" />
               </div>
               <div>
                 <p className="text-sm text-green-100">Average Win Rate</p>

@@ -49,10 +49,11 @@ const TeamRankings = () => {
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label htmlFor="rankings-season" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Season
             </label>
             <select
+              id="rankings-season"
               value={selectedYear}
               onChange={(e) => setSelectedYear(Number(e.target.value))}
               className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-cfb-primary"
@@ -64,10 +65,11 @@ const TeamRankings = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label htmlFor="rankings-week" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Week
             </label>
             <select
+              id="rankings-week"
               value={selectedWeek}
               onChange={(e) => setSelectedWeek(Number(e.target.value))}
               className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-cfb-primary"
@@ -79,10 +81,11 @@ const TeamRankings = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label htmlFor="rankings-poll" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Poll
             </label>
             <select
+              id="rankings-poll"
               value={selectedPoll}
               onChange={(e) => setSelectedPoll(e.target.value)}
               className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-cfb-primary"
@@ -193,7 +196,7 @@ const TeamRankings = () => {
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
             <div className="flex items-center space-x-3">
               <div className="w-12 h-12 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg flex items-center justify-center">
-                <Trophy className="w-6 h-6 text-yellow-600 dark:text-yellow-400" />
+                <Trophy className="w-6 h-6 text-yellow-600 dark:text-yellow-400" aria-hidden="true" />
               </div>
               <div>
                 <p className="text-sm text-gray-500 dark:text-gray-400">Top Ranked</p>
@@ -207,7 +210,7 @@ const TeamRankings = () => {
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
             <div className="flex items-center space-x-3">
               <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
-                <TrendingUp className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                <TrendingUp className="w-6 h-6 text-blue-600 dark:text-blue-400" aria-hidden="true" />
               </div>
               <div>
                 <p className="text-sm text-gray-500 dark:text-gray-400">Total Teams Ranked</p>
@@ -221,7 +224,7 @@ const TeamRankings = () => {
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
             <div className="flex items-center space-x-3">
               <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
-                <Trophy className="w-6 h-6 text-green-600 dark:text-green-400" />
+                <Trophy className="w-6 h-6 text-green-600 dark:text-green-400" aria-hidden="true" />
               </div>
               <div>
                 <p className="text-sm text-gray-500 dark:text-gray-400">First Place Votes</p>

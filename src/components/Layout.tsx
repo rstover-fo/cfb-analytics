@@ -23,13 +23,18 @@ const Layout = ({ children, darkMode, toggleDarkMode }: LayoutProps) => {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+      {/* Skip to content link for keyboard accessibility */}
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
+
       {/* Header */}
       <header className="bg-white dark:bg-gray-800 shadow-md sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="w-10 h-10 bg-gradient-to-br from-cfb-primary to-cfb-secondary rounded-lg flex items-center justify-center">
-                <Trophy className="w-6 h-6 text-white" />
+                <Trophy className="w-6 h-6 text-white" aria-hidden="true" />
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
@@ -46,9 +51,9 @@ const Layout = ({ children, darkMode, toggleDarkMode }: LayoutProps) => {
               aria-label="Toggle dark mode"
             >
               {darkMode ? (
-                <Sun className="w-5 h-5 text-yellow-500" />
+                <Sun className="w-5 h-5 text-yellow-500" aria-hidden="true" />
               ) : (
-                <Moon className="w-5 h-5 text-gray-700" />
+                <Moon className="w-5 h-5 text-gray-700" aria-hidden="true" />
               )}
             </button>
           </div>
@@ -72,7 +77,7 @@ const Layout = ({ children, darkMode, toggleDarkMode }: LayoutProps) => {
                       : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
                   }`}
                 >
-                  <Icon className="w-4 h-4" />
+                  <Icon className="w-4 h-4" aria-hidden="true" />
                   <span className="text-sm font-medium">{item.label}</span>
                 </Link>
               )
@@ -82,7 +87,7 @@ const Layout = ({ children, darkMode, toggleDarkMode }: LayoutProps) => {
       </nav>
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-8">
+      <main id="main-content" className="container mx-auto px-4 py-8">
         {children}
       </main>
 

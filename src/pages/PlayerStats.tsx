@@ -74,10 +74,11 @@ const PlayerStats = () => {
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label htmlFor="players-season" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Season
             </label>
             <select
+              id="players-season"
               value={selectedYear}
               onChange={(e) => setSelectedYear(Number(e.target.value))}
               className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-cfb-primary"
@@ -89,10 +90,11 @@ const PlayerStats = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label htmlFor="players-category" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Category
             </label>
             <select
+              id="players-category"
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
               className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-cfb-primary"
@@ -104,10 +106,11 @@ const PlayerStats = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label htmlFor="players-team" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Team (Optional)
             </label>
             <select
+              id="players-team"
               value={selectedTeam}
               onChange={(e) => setSelectedTeam(e.target.value)}
               className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-cfb-primary"
@@ -128,7 +131,7 @@ const PlayerStats = () => {
             <div className="bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg shadow-md p-6 text-white">
               <div className="flex items-center space-x-3 mb-4">
                 <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
-                  <TrendingUp className="w-6 h-6" />
+                  <TrendingUp className="w-6 h-6" aria-hidden="true" />
                 </div>
                 <div>
                   <p className="text-sm text-blue-100">Leading in Yards</p>
@@ -146,7 +149,7 @@ const PlayerStats = () => {
             <div className="bg-gradient-to-br from-green-500 to-green-700 rounded-lg shadow-md p-6 text-white">
               <div className="flex items-center space-x-3 mb-4">
                 <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
-                  <Trophy className="w-6 h-6" />
+                  <Trophy className="w-6 h-6" aria-hidden="true" />
                 </div>
                 <div>
                   <p className="text-sm text-green-100">Leading in Touchdowns</p>
@@ -241,7 +244,7 @@ const PlayerStats = () => {
         ))
       ) : (
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-12 text-center">
-          <Users className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+          <Users className="w-16 h-16 text-gray-400 mx-auto mb-4" aria-hidden="true" />
           <p className="text-gray-500 dark:text-gray-400">
             No player statistics found for the selected filters
           </p>
