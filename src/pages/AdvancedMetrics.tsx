@@ -57,10 +57,10 @@ const AdvancedMetrics = () => {
         <div className="bg-gray-900 text-white p-4 rounded-lg shadow-lg border border-gray-700">
           <p className="font-bold mb-2">{data.team}</p>
           <p className="text-sm text-gray-300">{data.conference}</p>
-          <div className="mt-2 space-y-1 text-sm">
-            <p>PPA: {data[metricView === 'offense' ? 'offensePPA' : 'defensePPA'].toFixed(3)}</p>
-            <p>Success Rate: {data[metricView === 'offense' ? 'offenseSuccessRate' : 'defenseSuccessRate'].toFixed(1)}%</p>
-            <p>Explosiveness: {data[metricView === 'offense' ? 'offenseExplosiveness' : 'defenseExplosiveness'].toFixed(3)}</p>
+          <div className="mt-2 space-y-1 text-sm tabular-nums">
+            <p>PPA:&nbsp;{data[metricView === 'offense' ? 'offensePPA' : 'defensePPA'].toFixed(3)}</p>
+            <p>Success Rate:&nbsp;{data[metricView === 'offense' ? 'offenseSuccessRate' : 'defenseSuccessRate'].toFixed(1)}%</p>
+            <p>Explosiveness:&nbsp;{data[metricView === 'offense' ? 'offenseExplosiveness' : 'defenseExplosiveness'].toFixed(3)}</p>
           </div>
         </div>
       )
@@ -79,7 +79,7 @@ const AdvancedMetrics = () => {
       </div>
 
       {/* Filters */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md p-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
             <label htmlFor="metrics-season" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -148,7 +148,7 @@ const AdvancedMetrics = () => {
 
       {/* Metrics Explanation */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md p-6">
           <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4">
             <Target className="w-6 h-6 text-blue-600 dark:text-blue-400" aria-hidden="true" />
           </div>
@@ -158,7 +158,7 @@ const AdvancedMetrics = () => {
           </p>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md p-6">
           <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-4">
             <Activity className="w-6 h-6 text-green-600 dark:text-green-400" aria-hidden="true" />
           </div>
@@ -168,7 +168,7 @@ const AdvancedMetrics = () => {
           </p>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md p-6">
           <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mb-4">
             <Zap className="w-6 h-6 text-purple-600 dark:text-purple-400" aria-hidden="true" />
           </div>
@@ -181,7 +181,7 @@ const AdvancedMetrics = () => {
 
       {/* Scatter Plot */}
       {!loading && scatterData.length > 0 && (
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md p-6">
           <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
             {metricView === 'offense' ? 'Offensive' : 'Defensive'} Efficiency: PPA vs Success Rate
           </h3>
@@ -228,7 +228,7 @@ const AdvancedMetrics = () => {
       {/* Leaders Tables */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Offensive Leaders */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-green-500 to-green-700">
             <h3 className="text-xl font-bold text-white flex items-center">
               <TrendingUp className="w-5 h-5 mr-2" aria-hidden="true" />
@@ -262,12 +262,12 @@ const AdvancedMetrics = () => {
                         <p className="text-xs text-gray-500 dark:text-gray-400">{stat.conference}</p>
                       </div>
                     </div>
-                    <div className="text-right">
+                    <div className="text-right tabular-nums">
                       <p className="text-lg font-bold text-green-600 dark:text-green-400">
                         {stat.offense?.ppa.toFixed(3)}
                       </p>
                       <p className="text-xs text-gray-500 dark:text-gray-400">
-                        {((stat.offense?.successRate || 0) * 100).toFixed(1)}% SR
+                        {((stat.offense?.successRate || 0) * 100).toFixed(1)}%&nbsp;SR
                       </p>
                     </div>
                   </div>
@@ -282,7 +282,7 @@ const AdvancedMetrics = () => {
         </div>
 
         {/* Defensive Leaders */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-red-500 to-red-700">
             <h3 className="text-xl font-bold text-white flex items-center">
               <Activity className="w-5 h-5 mr-2" aria-hidden="true" />
@@ -316,12 +316,12 @@ const AdvancedMetrics = () => {
                         <p className="text-xs text-gray-500 dark:text-gray-400">{stat.conference}</p>
                       </div>
                     </div>
-                    <div className="text-right">
+                    <div className="text-right tabular-nums">
                       <p className="text-lg font-bold text-red-600 dark:text-red-400">
                         {stat.defense?.ppa.toFixed(3)}
                       </p>
                       <p className="text-xs text-gray-500 dark:text-gray-400">
-                        {((stat.defense?.successRate || 0) * 100).toFixed(1)}% SR
+                        {((stat.defense?.successRate || 0) * 100).toFixed(1)}%&nbsp;SR
                       </p>
                     </div>
                   </div>

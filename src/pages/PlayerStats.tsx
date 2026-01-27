@@ -71,7 +71,7 @@ const PlayerStats = () => {
       </div>
 
       {/* Filters */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md p-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
             <label htmlFor="players-season" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -128,7 +128,7 @@ const PlayerStats = () => {
       {!loading && (topYards || topTDs) && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {topYards && (
-            <div className="bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg shadow-md p-6 text-white">
+            <div className="bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg shadow-layered-md p-6 text-white">
               <div className="flex items-center space-x-3 mb-4">
                 <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
                   <TrendingUp className="w-6 h-6" aria-hidden="true" />
@@ -140,13 +140,13 @@ const PlayerStats = () => {
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-blue-100">{topYards.team}</span>
-                <span className="text-3xl font-bold">{topYards.stat.toFixed(0)}</span>
+                <span className="text-3xl font-bold tabular-nums">{topYards.stat.toLocaleString()}</span>
               </div>
             </div>
           )}
 
           {topTDs && (
-            <div className="bg-gradient-to-br from-green-500 to-green-700 rounded-lg shadow-md p-6 text-white">
+            <div className="bg-gradient-to-br from-green-500 to-green-700 rounded-lg shadow-layered-md p-6 text-white">
               <div className="flex items-center space-x-3 mb-4">
                 <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
                   <Trophy className="w-6 h-6" aria-hidden="true" />
@@ -158,7 +158,7 @@ const PlayerStats = () => {
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-green-100">{topTDs.team}</span>
-                <span className="text-3xl font-bold">{topTDs.stat.toFixed(0)}</span>
+                <span className="text-3xl font-bold tabular-nums">{topTDs.stat.toFixed(0)}</span>
               </div>
             </div>
           )}
@@ -167,7 +167,7 @@ const PlayerStats = () => {
 
       {/* Player Stats Tables */}
       {loading ? (
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md p-6">
           <div className="space-y-4">
             {[...Array(10)].map((_, i) => (
               <div key={i} className="animate-pulse h-16 bg-gray-200 dark:bg-gray-700 rounded"></div>
@@ -176,13 +176,13 @@ const PlayerStats = () => {
         </div>
       ) : Object.keys(groupedPlayers).length > 0 ? (
         Object.entries(groupedPlayers).map(([statType, statPlayers]) => (
-          <div key={statType} className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+          <div key={statType} className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md overflow-hidden">
             <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700">
               <h3 className="text-xl font-bold text-gray-900 dark:text-white">
                 {getStatLabel(statType)} Leaders
               </h3>
             </div>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto overscroll-x-contain">
               <table className="w-full">
                 <thead className="bg-gray-50 dark:bg-gray-700">
                   <tr>
@@ -231,8 +231,8 @@ const PlayerStats = () => {
                         </span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm font-bold text-gray-900 dark:text-white">
-                          {player.stat.toFixed(statType === 'AVG' ? 2 : 0)}
+                        <div className="text-sm font-bold text-gray-900 dark:text-white tabular-nums">
+                          {statType === 'AVG' ? player.stat.toFixed(2) : player.stat.toLocaleString()}
                         </div>
                       </td>
                     </tr>
@@ -243,7 +243,7 @@ const PlayerStats = () => {
           </div>
         ))
       ) : (
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-12 text-center">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md p-12 text-center">
           <Users className="w-16 h-16 text-gray-400 mx-auto mb-4" aria-hidden="true" />
           <p className="text-gray-500 dark:text-gray-400">
             No player statistics found for the selected filters

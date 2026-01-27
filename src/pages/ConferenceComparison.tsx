@@ -60,7 +60,7 @@ const ConferenceComparison = () => {
       </div>
 
       {/* Year Filter */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md p-6">
         <div className="max-w-xs">
           <label htmlFor="conference-season" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Season
@@ -81,7 +81,7 @@ const ConferenceComparison = () => {
       {/* Quick Stats */}
       {!loading && sortedStats.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-gradient-to-br from-yellow-500 to-yellow-700 rounded-lg shadow-md p-6 text-white">
+          <div className="bg-gradient-to-br from-yellow-500 to-yellow-700 rounded-lg shadow-layered-md p-6 text-white">
             <div className="flex items-center space-x-3 mb-4">
               <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
                 <Trophy className="w-6 h-6" aria-hidden="true" />
@@ -91,10 +91,10 @@ const ConferenceComparison = () => {
                 <p className="text-xl font-bold">{sortedStats[0].conference}</p>
               </div>
             </div>
-            <div className="text-3xl font-bold">{sortedStats[0].winPercentage.toFixed(1)}%</div>
+            <div className="text-3xl font-bold tabular-nums">{sortedStats[0].winPercentage.toFixed(1)}%</div>
           </div>
 
-          <div className="bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg shadow-md p-6 text-white">
+          <div className="bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg shadow-layered-md p-6 text-white">
             <div className="flex items-center space-x-3 mb-4">
               <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
                 <BarChart3 className="w-6 h-6" aria-hidden="true" />
@@ -104,10 +104,10 @@ const ConferenceComparison = () => {
                 <p className="text-xl font-bold">Tracked</p>
               </div>
             </div>
-            <div className="text-3xl font-bold">{conferences.length}</div>
+            <div className="text-3xl font-bold tabular-nums">{conferences.length}</div>
           </div>
 
-          <div className="bg-gradient-to-br from-green-500 to-green-700 rounded-lg shadow-md p-6 text-white">
+          <div className="bg-gradient-to-br from-green-500 to-green-700 rounded-lg shadow-layered-md p-6 text-white">
             <div className="flex items-center space-x-3 mb-4">
               <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
                 <TrendingUp className="w-6 h-6" aria-hidden="true" />
@@ -117,7 +117,7 @@ const ConferenceComparison = () => {
                 <p className="text-xl font-bold">All Conferences</p>
               </div>
             </div>
-            <div className="text-3xl font-bold">
+            <div className="text-3xl font-bold tabular-nums">
               {(sortedStats.reduce((sum, s) => sum + s.winPercentage, 0) / sortedStats.length).toFixed(1)}%
             </div>
           </div>
@@ -128,7 +128,7 @@ const ConferenceComparison = () => {
       {!loading && sortedStats.length > 0 && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Win Percentage Bar Chart */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md p-6">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
               Win Percentage by Conference
             </h3>
@@ -156,7 +156,7 @@ const ConferenceComparison = () => {
           </div>
 
           {/* Teams Distribution Pie Chart */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md p-6">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
               Teams Distribution
             </h3>
@@ -190,11 +190,11 @@ const ConferenceComparison = () => {
       )}
 
       {/* Conference Stats Table */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md overflow-hidden">
         <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
           <h3 className="text-xl font-bold text-gray-900 dark:text-white">Conference Statistics</h3>
         </div>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto overscroll-x-contain">
           <table className="w-full">
             <thead className="bg-gray-50 dark:bg-gray-700">
               <tr>
@@ -247,19 +247,19 @@ const ConferenceComparison = () => {
                         {stat.conference}
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white tabular-nums">
                       {stat.teams}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white tabular-nums">
                       {stat.totalWins}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white tabular-nums">
                       {stat.totalGames}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
                         <div className="w-16">
-                          <div className="text-sm font-bold text-gray-900 dark:text-white">
+                          <div className="text-sm font-bold text-gray-900 dark:text-white tabular-nums">
                             {stat.winPercentage.toFixed(1)}%
                           </div>
                         </div>
@@ -273,7 +273,7 @@ const ConferenceComparison = () => {
                         </div>
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white tabular-nums">
                       {stat.avgWins.toFixed(1)}
                     </td>
                   </tr>

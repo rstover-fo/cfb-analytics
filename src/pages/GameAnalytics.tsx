@@ -67,7 +67,7 @@ const GameAnalytics = () => {
       </div>
 
       {/* Filters */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md p-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
             <label htmlFor="games-season" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -122,57 +122,57 @@ const GameAnalytics = () => {
 
       {/* Quick Stats */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md p-6">
           <div className="flex items-center space-x-3">
             <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
               <Activity className="w-6 h-6 text-blue-600 dark:text-blue-400" aria-hidden="true" />
             </div>
             <div>
               <p className="text-sm text-gray-500 dark:text-gray-400">Total Games</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">{games.length}</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white tabular-nums">{games.length}</p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md p-6">
           <div className="flex items-center space-x-3">
             <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
               <Activity className="w-6 h-6 text-green-600 dark:text-green-400" aria-hidden="true" />
             </div>
             <div>
               <p className="text-sm text-gray-500 dark:text-gray-400">Avg Home Score</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">{avgHomeScore}</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white tabular-nums">{avgHomeScore}</p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md p-6">
           <div className="flex items-center space-x-3">
             <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center">
               <Activity className="w-6 h-6 text-orange-600 dark:text-orange-400" aria-hidden="true" />
             </div>
             <div>
               <p className="text-sm text-gray-500 dark:text-gray-400">Road Wins</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">{upsets}</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white tabular-nums">{upsets}</p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md p-6">
           <div className="flex items-center space-x-3">
             <div className="w-12 h-12 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center">
               <Activity className="w-6 h-6 text-red-600 dark:text-red-400" aria-hidden="true" />
             </div>
             <div>
               <p className="text-sm text-gray-500 dark:text-gray-400">Blowouts (21+)</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">{blowouts}</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white tabular-nums">{blowouts}</p>
             </div>
           </div>
         </div>
       </div>
 
       {/* Score Distribution Chart */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md p-6">
         <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
           Total Score Distribution
         </h3>
@@ -195,7 +195,7 @@ const GameAnalytics = () => {
       </div>
 
       {/* Games List */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md overflow-hidden">
         <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
           <h3 className="text-xl font-bold text-gray-900 dark:text-white">Games</h3>
         </div>
@@ -227,7 +227,7 @@ const GameAnalytics = () => {
                           {game.away_conference}
                         </span>
                       </div>
-                      <span className={`text-2xl font-bold ${
+                      <span className={`text-2xl font-bold tabular-nums ${
                         game.away_points > game.home_points
                           ? 'text-green-600 dark:text-green-400'
                           : 'text-gray-900 dark:text-white'
@@ -249,7 +249,7 @@ const GameAnalytics = () => {
                           {game.home_conference}
                         </span>
                       </div>
-                      <span className={`text-2xl font-bold ${
+                      <span className={`text-2xl font-bold tabular-nums ${
                         game.home_points > game.away_points
                           ? 'text-green-600 dark:text-green-400'
                           : 'text-gray-900 dark:text-white'
@@ -268,7 +268,7 @@ const GameAnalytics = () => {
                       {game.venue}
                     </div>
                     {game.attendance && (
-                      <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                      <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 tabular-nums">
                         <Users className="w-4 h-4 mr-1" aria-hidden="true" />
                         {game.attendance.toLocaleString()}
                       </div>

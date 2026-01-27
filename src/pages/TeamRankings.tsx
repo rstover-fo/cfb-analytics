@@ -46,7 +46,7 @@ const TeamRankings = () => {
       </div>
 
       {/* Filters */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md p-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
             <label htmlFor="rankings-season" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -99,8 +99,8 @@ const TeamRankings = () => {
       </div>
 
       {/* Rankings Table */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
-        <div className="overflow-x-auto">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md overflow-hidden">
+        <div className="overflow-x-auto overscroll-x-contain">
           <table className="w-full">
             <thead className="bg-gray-50 dark:bg-gray-700">
               <tr>
@@ -164,12 +164,12 @@ const TeamRankings = () => {
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white font-medium">
                       {getTeamRecord(rank.school)}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white font-semibold">
-                      {rank.points}
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white font-semibold tabular-nums">
+                      {rank.points.toLocaleString()}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white tabular-nums">
                       {rank.firstPlaceVotes > 0 ? (
-                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-400">
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-400 tabular-nums">
                           {rank.firstPlaceVotes}
                         </span>
                       ) : (
@@ -193,7 +193,7 @@ const TeamRankings = () => {
       {/* Stats Summary */}
       {currentRanks.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md p-6">
             <div className="flex items-center space-x-3">
               <div className="w-12 h-12 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg flex items-center justify-center">
                 <Trophy className="w-6 h-6 text-yellow-600 dark:text-yellow-400" aria-hidden="true" />
@@ -207,28 +207,28 @@ const TeamRankings = () => {
             </div>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md p-6">
             <div className="flex items-center space-x-3">
               <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
                 <TrendingUp className="w-6 h-6 text-blue-600 dark:text-blue-400" aria-hidden="true" />
               </div>
               <div>
                 <p className="text-sm text-gray-500 dark:text-gray-400">Total Teams Ranked</p>
-                <p className="text-lg font-bold text-gray-900 dark:text-white">
+                <p className="text-lg font-bold text-gray-900 dark:text-white tabular-nums">
                   {currentRanks.length}
                 </p>
               </div>
             </div>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md p-6">
             <div className="flex items-center space-x-3">
               <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
                 <Trophy className="w-6 h-6 text-green-600 dark:text-green-400" aria-hidden="true" />
               </div>
               <div>
                 <p className="text-sm text-gray-500 dark:text-gray-400">First Place Votes</p>
-                <p className="text-lg font-bold text-gray-900 dark:text-white">
+                <p className="text-lg font-bold text-gray-900 dark:text-white tabular-nums">
                   {currentRanks[0]?.firstPlaceVotes || 0}
                 </p>
               </div>

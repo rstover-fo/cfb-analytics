@@ -81,7 +81,7 @@ const LiveScores = () => {
       </div>
 
       {/* Filters */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md p-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label htmlFor="scores-season" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -124,54 +124,54 @@ const LiveScores = () => {
 
       {/* Summary Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md p-6">
           <div className="flex items-center space-x-3">
             <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
               <Calendar className="w-6 h-6 text-blue-600 dark:text-blue-400" aria-hidden="true" />
             </div>
             <div>
               <p className="text-sm text-gray-500 dark:text-gray-400">Total Games</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">{games.length}</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white tabular-nums">{games.length}</p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md p-6">
           <div className="flex items-center space-x-3">
             <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
               <Clock className="w-6 h-6 text-green-600 dark:text-green-400" aria-hidden="true" />
             </div>
             <div>
               <p className="text-sm text-gray-500 dark:text-gray-400">Completed</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">
+              <p className="text-2xl font-bold text-gray-900 dark:text-white tabular-nums">
                 {games.filter(g => isGameFinal(g)).length}
               </p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md p-6">
           <div className="flex items-center space-x-3">
             <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center">
               <Calendar className="w-6 h-6 text-orange-600 dark:text-orange-400" aria-hidden="true" />
             </div>
             <div>
               <p className="text-sm text-gray-500 dark:text-gray-400">Upcoming</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">
+              <p className="text-2xl font-bold text-gray-900 dark:text-white tabular-nums">
                 {games.filter(g => !isGameFinal(g)).length}
               </p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md p-6">
           <div className="flex items-center space-x-3">
             <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center">
               <Users className="w-6 h-6 text-purple-600 dark:text-purple-400" aria-hidden="true" />
             </div>
             <div>
               <p className="text-sm text-gray-500 dark:text-gray-400">Avg Attendance</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">
+              <p className="text-2xl font-bold text-gray-900 dark:text-white tabular-nums">
                 {games.filter(g => g.attendance).length > 0
                   ? Math.round(games.reduce((sum, g) => sum + (g.attendance || 0), 0) / games.filter(g => g.attendance).length).toLocaleString()
                   : 'N/A'
@@ -186,7 +186,7 @@ const LiveScores = () => {
       {loading ? (
         <div className="space-y-6">
           {[...Array(3)].map((_, i) => (
-            <div key={i} className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+            <div key={i} className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md p-6">
               <div className="animate-pulse space-y-4">
                 <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-1/3"></div>
                 <div className="space-y-3">
@@ -201,7 +201,7 @@ const LiveScores = () => {
       ) : Object.keys(gamesByDate).length > 0 ? (
         <div className="space-y-6">
           {Object.entries(gamesByDate).map(([date, dateGames]) => (
-            <div key={date} className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+            <div key={date} className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md overflow-hidden">
               <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700">
                 <h3 className="text-lg font-bold text-gray-900 dark:text-white flex items-center">
                   <Calendar className="w-5 h-5 mr-2" aria-hidden="true" />
@@ -236,7 +236,7 @@ const LiveScores = () => {
                                 {game.away_conference}
                               </span>
                             </div>
-                            <span className={`text-2xl font-bold ml-4 ${
+                            <span className={`text-2xl font-bold ml-4 tabular-nums ${
                               winner === 'away'
                                 ? 'text-green-600 dark:text-green-400'
                                 : 'text-gray-900 dark:text-white'
@@ -259,7 +259,7 @@ const LiveScores = () => {
                                 {game.home_conference}
                               </span>
                             </div>
-                            <span className={`text-2xl font-bold ml-4 ${
+                            <span className={`text-2xl font-bold ml-4 tabular-nums ${
                               winner === 'home'
                                 ? 'text-green-600 dark:text-green-400'
                                 : 'text-gray-900 dark:text-white'
@@ -283,15 +283,15 @@ const LiveScores = () => {
                             <span className="truncate">{game.venue}</span>
                           </div>
                           {game.attendance && (
-                            <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                            <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 tabular-nums">
                               <Users className="w-4 h-4 mr-1" aria-hidden="true" />
-                              {game.attendance.toLocaleString()} attendance
+                              {game.attendance.toLocaleString()}&nbsp;attendance
                             </div>
                           )}
                           {game.excitement_index && (
-                            <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                            <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 tabular-nums">
                               <Clock className="w-4 h-4 mr-1" aria-hidden="true" />
-                              Excitement: {game.excitement_index.toFixed(2)}
+                              Excitement:&nbsp;{game.excitement_index.toFixed(2)}
                             </div>
                           )}
                         </div>
@@ -304,7 +304,7 @@ const LiveScores = () => {
           ))}
         </div>
       ) : (
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-12 text-center">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md p-12 text-center">
           <Calendar className="w-16 h-16 text-gray-400 mx-auto mb-4" aria-hidden="true" />
           <p className="text-gray-500 dark:text-gray-400">
             No games found for Week {selectedWeek} of the {selectedYear} season

@@ -40,7 +40,7 @@ const Dashboard = () => {
       {/* Quick Stats */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <Link to="/rankings">
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow cursor-pointer">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md p-6 hover:shadow-lg transition-shadow cursor-pointer">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-gray-500 dark:text-gray-400 text-sm">Team Rankings</p>
@@ -54,7 +54,7 @@ const Dashboard = () => {
         </Link>
 
         <Link to="/games">
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow cursor-pointer">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md p-6 hover:shadow-lg transition-shadow cursor-pointer">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-gray-500 dark:text-gray-400 text-sm">Game Analysis</p>
@@ -68,7 +68,7 @@ const Dashboard = () => {
         </Link>
 
         <Link to="/players">
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow cursor-pointer">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md p-6 hover:shadow-lg transition-shadow cursor-pointer">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-gray-500 dark:text-gray-400 text-sm">Player Stats</p>
@@ -82,7 +82,7 @@ const Dashboard = () => {
         </Link>
 
         <Link to="/metrics">
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow cursor-pointer">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md p-6 hover:shadow-lg transition-shadow cursor-pointer">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-gray-500 dark:text-gray-400 text-sm">Advanced Stats</p>
@@ -99,7 +99,7 @@ const Dashboard = () => {
       {/* Top 5 Rankings and Recent Games */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Top 5 Rankings */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md p-6">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-bold text-gray-900 dark:text-white">Top 5 Rankings</h2>
             <Link to="/rankings" className="text-sm text-cfb-primary dark:text-cfb-accent hover:underline">
@@ -129,8 +129,8 @@ const Dashboard = () => {
                     <p className="font-semibold text-gray-900 dark:text-white">{rank.school}</p>
                     <p className="text-sm text-gray-500 dark:text-gray-400">{rank.conference}</p>
                   </div>
-                  <div className="text-sm font-medium text-gray-600 dark:text-gray-300">
-                    {rank.points} pts
+                  <div className="text-sm font-medium text-gray-600 dark:text-gray-300 tabular-nums">
+                    {rank.points.toLocaleString()}&nbsp;pts
                   </div>
                 </div>
               ))}
@@ -139,7 +139,7 @@ const Dashboard = () => {
         </div>
 
         {/* Recent Games */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md p-6">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-bold text-gray-900 dark:text-white">Recent Games</h2>
             <Link to="/scores" className="text-sm text-cfb-primary dark:text-cfb-accent hover:underline">
@@ -165,7 +165,7 @@ const Dashboard = () => {
                         <span className="font-medium text-gray-900 dark:text-white">
                           {game.away_team}
                         </span>
-                        <span className="font-bold text-lg text-gray-900 dark:text-white">
+                        <span className="font-bold text-lg text-gray-900 dark:text-white tabular-nums">
                           {game.away_points}
                         </span>
                       </div>
@@ -173,7 +173,7 @@ const Dashboard = () => {
                         <span className="font-medium text-gray-900 dark:text-white">
                           {game.home_team}
                         </span>
-                        <span className="font-bold text-lg text-gray-900 dark:text-white">
+                        <span className="font-bold text-lg text-gray-900 dark:text-white tabular-nums">
                           {game.home_points}
                         </span>
                       </div>
@@ -191,7 +191,7 @@ const Dashboard = () => {
 
       {/* Feature Highlights */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md p-6">
           <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4">
             <Trophy className="w-6 h-6 text-blue-600 dark:text-blue-400" aria-hidden="true" />
           </div>
@@ -203,7 +203,7 @@ const Dashboard = () => {
           </p>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md p-6">
           <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-4">
             <TrendingUp className="w-6 h-6 text-green-600 dark:text-green-400" aria-hidden="true" />
           </div>
@@ -215,7 +215,7 @@ const Dashboard = () => {
           </p>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-layered-md p-6">
           <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mb-4">
             <Activity className="w-6 h-6 text-purple-600 dark:text-purple-400" aria-hidden="true" />
           </div>

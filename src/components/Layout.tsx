@@ -29,7 +29,7 @@ const Layout = ({ children, darkMode, toggleDarkMode }: LayoutProps) => {
       </a>
 
       {/* Header */}
-      <header className="bg-white dark:bg-gray-800 shadow-md sticky top-0 z-50">
+      <header className="bg-white dark:bg-gray-800 shadow-layered-md sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
