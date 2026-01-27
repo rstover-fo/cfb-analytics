@@ -50,7 +50,7 @@ export function ClassRankingChart({ data }: ClassRankingChartProps) {
             {
               dataKey: 'nationalRank',
               name: 'National Rank',
-              color: 'hsl(var(--chart-1))',
+              color: 'var(--color-chart-1)',
             },
           ]}
           yAxisDomain={['dataMax', 1]}

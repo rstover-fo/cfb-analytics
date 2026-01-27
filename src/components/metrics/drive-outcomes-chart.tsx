@@ -13,13 +13,13 @@ interface DriveOutcomesChartProps {
  * Outcome colors for the chart.
  */
 const OUTCOME_COLORS: Record<string, string> = {
-  Touchdowns: 'hsl(var(--chart-2))', // green
-  'Field Goals': 'hsl(var(--chart-3))', // yellow/orange
-  Punts: 'hsl(var(--chart-5))', // gray/neutral
-  Turnovers: 'hsl(var(--chart-1))', // red
-  Downs: 'hsl(var(--chart-4))', // purple
-  'End of Half': 'hsl(var(--muted))', // muted
-  Other: 'hsl(var(--muted))', // muted
+  Touchdowns: 'var(--color-chart-2)', // green
+  'Field Goals': 'var(--color-chart-3)', // yellow/orange
+  Punts: 'var(--color-chart-5)', // gray/neutral
+  Turnovers: 'var(--color-chart-1)', // red
+  Downs: 'var(--color-chart-4)', // purple
+  'End of Half': 'var(--color-muted)', // muted
+  Other: 'var(--color-muted)', // muted
 };
 
 /**
@@ -78,7 +78,7 @@ export function DriveOutcomesChart({ data }: DriveOutcomesChartProps) {
             {
               dataKey: 'count',
               name: 'Drives',
-              color: 'hsl(var(--chart-1))',
+              color: 'var(--color-chart-1)',
             },
           ]}
           height={250}
@@ -89,7 +89,7 @@ export function DriveOutcomesChart({ data }: DriveOutcomesChartProps) {
             if (!entry) return [`${value} drives`, ''];
             return [`${value} drives (${entry.pct}%)`, entry.outcome];
           }}
-          getBarColor={(entry) => OUTCOME_COLORS[entry.outcome as string] || 'hsl(var(--chart-1))'}
+          getBarColor={(entry) => OUTCOME_COLORS[entry.outcome as string] || 'var(--color-chart-1)'}
         />
         <div className="mt-4 grid grid-cols-3 gap-2 text-xs">
           <div className="text-center">

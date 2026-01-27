@@ -52,10 +52,10 @@ export function ConferenceSplitsChart({
         yAxisDomain={[0, 'dataMax']}
         yAxisLabel="Games"
         bars={[
-          { dataKey: 'confWins', name: 'Conf. Wins', color: 'hsl(var(--chart-1))' },
-          { dataKey: 'confLosses', name: 'Conf. Losses', color: 'hsl(var(--chart-3))' },
-          { dataKey: 'nonConfWins', name: 'Non-Conf. Wins', color: 'hsl(var(--chart-2))' },
-          { dataKey: 'nonConfLosses', name: 'Non-Conf. Losses', color: 'hsl(var(--chart-5))' },
+          { dataKey: 'confWins', name: 'Conf. Wins', color: 'var(--color-chart-1)' },
+          { dataKey: 'confLosses', name: 'Conf. Losses', color: 'var(--color-chart-3)' },
+          { dataKey: 'nonConfWins', name: 'Non-Conf. Wins', color: 'var(--color-chart-2)' },
+          { dataKey: 'nonConfLosses', name: 'Non-Conf. Losses', color: 'var(--color-chart-5)' },
         ]}
         tooltipFormatter={(value, name) => {
           return [`${value}`, name ?? ''];

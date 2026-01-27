@@ -127,8 +127,24 @@
   *:focus-visible {
     @apply ring-ring ring-offset-background ring-2 ring-offset-2 outline-none;
   }
+  html {
+    color-scheme: dark;
+  }
   body {
     @apply bg-background text-foreground;
+  }
+  /* Anchored headings: offset for sticky header */
+  [id] {
+    scroll-margin-top: 4rem;
+  }
+  /* Prevent overscroll on modals/drawers */
+  [data-slot="sheet-content"],
+  [data-slot="sidebar"] {
+    overscroll-behavior: contain;
+  }
+  /* Prevent double-tap zoom delay on interactive controls */
+  button, a, select, input, textarea, [role="button"] {
+    touch-action: manipulation;
   }
 }
 

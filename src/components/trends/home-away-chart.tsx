@@ -48,10 +48,10 @@ export function HomeAwayChart({ data, height = 300, className }: HomeAwayChartPr
         yAxisDomain={[0, 'dataMax']}
         yAxisLabel="Games"
         bars={[
-          { dataKey: 'homeWins', name: 'Home Wins', color: 'hsl(var(--chart-1))' },
-          { dataKey: 'homeLosses', name: 'Home Losses', color: 'hsl(var(--chart-3))' },
-          { dataKey: 'awayWins', name: 'Away Wins', color: 'hsl(var(--chart-2))' },
-          { dataKey: 'awayLosses', name: 'Away Losses', color: 'hsl(var(--chart-5))' },
+          { dataKey: 'homeWins', name: 'Home Wins', color: 'var(--color-chart-1)' },
+          { dataKey: 'homeLosses', name: 'Home Losses', color: 'var(--color-chart-3)' },
+          { dataKey: 'awayWins', name: 'Away Wins', color: 'var(--color-chart-2)' },
+          { dataKey: 'awayLosses', name: 'Away Losses', color: 'var(--color-chart-5)' },
         ]}
         tooltipFormatter={(value, name) => {
           return [`${value}`, name ?? ''];

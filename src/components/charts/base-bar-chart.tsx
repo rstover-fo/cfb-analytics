@@ -130,7 +130,7 @@ export function BaseBarChart<T extends Record<string, unknown>>({
           {showGrid && (
             <CartesianGrid
               strokeDasharray="3 3"
-              stroke="hsl(var(--border))"
+              stroke="var(--color-border)"
               strokeOpacity={0.5}
               horizontal={layout === 'horizontal'}
               vertical={layout === 'vertical'}
@@ -139,10 +139,10 @@ export function BaseBarChart<T extends Record<string, unknown>>({
           <XAxis
             dataKey={layout === 'horizontal' ? xAxisKey : undefined}
             type={layout === 'horizontal' ? 'category' : 'number'}
-            stroke="hsl(var(--muted-foreground))"
+            stroke="var(--color-muted-foreground)"
             fontSize={14}
             tickLine={false}
-            axisLine={{ stroke: 'hsl(var(--border))' }}
+            axisLine={{ stroke: 'var(--color-border)' }}
             domain={layout === 'vertical' ? yAxisDomain : undefined}
             label={
               xAxisLabel
@@ -150,7 +150,7 @@ export function BaseBarChart<T extends Record<string, unknown>>({
                     value: xAxisLabel,
                     position: 'insideBottom',
                     offset: -5,
-                    fill: 'hsl(var(--muted-foreground))',
+                    fill: 'var(--color-muted-foreground)',
                     fontSize: 12,
                   }
                 : undefined
@@ -159,10 +159,10 @@ export function BaseBarChart<T extends Record<string, unknown>>({
           <YAxis
             dataKey={layout === 'vertical' ? xAxisKey : undefined}
             type={layout === 'vertical' ? 'category' : 'number'}
-            stroke="hsl(var(--muted-foreground))"
+            stroke="var(--color-muted-foreground)"
             fontSize={14}
             tickLine={false}
-            axisLine={{ stroke: 'hsl(var(--border))' }}
+            axisLine={{ stroke: 'var(--color-border)' }}
             domain={layout === 'horizontal' ? yAxisDomain : undefined}
             label={
               yAxisLabel
@@ -170,7 +170,7 @@ export function BaseBarChart<T extends Record<string, unknown>>({
                     value: yAxisLabel,
                     angle: -90,
                     position: 'insideLeft',
-                    fill: 'hsl(var(--muted-foreground))',
+                    fill: 'var(--color-muted-foreground)',
                     fontSize: 12,
                   }
                 : undefined
@@ -178,25 +178,25 @@ export function BaseBarChart<T extends Record<string, unknown>>({
           />
           <Tooltip
             contentStyle={{
-              backgroundColor: 'hsl(var(--popover))',
-              border: '1px solid hsl(var(--border))',
+              backgroundColor: 'var(--color-popover)',
+              border: '1px solid var(--color-border)',
               borderRadius: 'var(--radius)',
-              color: 'hsl(var(--popover-foreground))',
+              color: 'var(--color-popover-foreground)',
               fontSize: 12,
             }}
             labelStyle={{
-              color: 'hsl(var(--popover-foreground))',
+              color: 'var(--color-popover-foreground)',
               fontWeight: 600,
               marginBottom: 4,
             }}
             formatter={tooltipFormatter}
-            cursor={{ fill: 'hsl(var(--muted))', fillOpacity: 0.3 }}
+            cursor={{ fill: 'var(--color-muted)', fillOpacity: 0.3 }}
           />
           {showLegend && (
             <Legend
               wrapperStyle={{
                 fontSize: 12,
-                color: 'hsl(var(--foreground))',
+                color: 'var(--color-foreground)',
               }}
             />
           )}

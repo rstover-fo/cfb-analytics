@@ -17,14 +17,14 @@ interface PositionBreakdownChartProps {
 function getPositionColor(position: string): string {
   const colors: Record<string, string> = {
     // Offense
-    QB: 'hsl(var(--chart-1))', // Primary
-    RB: 'hsl(var(--chart-2))',
-    WR: 'hsl(var(--chart-3))',
-    TE: 'hsl(var(--chart-4))',
-    OL: 'hsl(var(--chart-5))',
-    OT: 'hsl(var(--chart-5))',
-    OG: 'hsl(var(--chart-5))',
-    C: 'hsl(var(--chart-5))',
+    QB: 'var(--color-chart-1)', // Primary
+    RB: 'var(--color-chart-2)',
+    WR: 'var(--color-chart-3)',
+    TE: 'var(--color-chart-4)',
+    OL: 'var(--color-chart-5)',
+    OT: 'var(--color-chart-5)',
+    OG: 'var(--color-chart-5)',
+    C: 'var(--color-chart-5)',
     // Defense
     DL: 'hsl(210, 70%, 50%)',
     DE: 'hsl(210, 70%, 50%)',
@@ -42,7 +42,7 @@ function getPositionColor(position: string): string {
     P: 'hsl(45, 60%, 48%)',
     LS: 'hsl(45, 50%, 45%)',
   };
-  return colors[position] || 'hsl(var(--muted-foreground))';
+  return colors[position] || 'var(--color-muted-foreground)';
 }
 
 export function PositionBreakdownChart({ data, year }: PositionBreakdownChartProps) {
@@ -79,7 +79,7 @@ export function PositionBreakdownChart({ data, year }: PositionBreakdownChartPro
             {
               dataKey: 'commits',
               name: 'Commits',
-              color: 'hsl(var(--chart-1))',
+              color: 'var(--color-chart-1)',
             },
           ]}
           height={250}

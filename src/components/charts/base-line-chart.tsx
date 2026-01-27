@@ -96,31 +96,31 @@ export function BaseLineChart<T extends Record<string, unknown>>({
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={data} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
           {showGrid && (
-            <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" strokeOpacity={0.5} />
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" strokeOpacity={0.5} />
           )}
           <XAxis
             dataKey={xAxisKey}
-            stroke="hsl(var(--muted-foreground))"
+            stroke="var(--color-muted-foreground)"
             fontSize={14}
             tickLine={false}
-            axisLine={{ stroke: 'hsl(var(--border))' }}
+            axisLine={{ stroke: 'var(--color-border)' }}
             label={
               xAxisLabel
                 ? {
                     value: xAxisLabel,
                     position: 'insideBottom',
                     offset: -5,
-                    fill: 'hsl(var(--muted-foreground))',
+                    fill: 'var(--color-muted-foreground)',
                     fontSize: 12,
                   }
                 : undefined
             }
           />
           <YAxis
-            stroke="hsl(var(--muted-foreground))"
+            stroke="var(--color-muted-foreground)"
             fontSize={14}
             tickLine={false}
-            axisLine={{ stroke: 'hsl(var(--border))' }}
+            axisLine={{ stroke: 'var(--color-border)' }}
             domain={yAxisDomain}
             label={
               yAxisLabel
@@ -128,7 +128,7 @@ export function BaseLineChart<T extends Record<string, unknown>>({
                     value: yAxisLabel,
                     angle: -90,
                     position: 'insideLeft',
-                    fill: 'hsl(var(--muted-foreground))',
+                    fill: 'var(--color-muted-foreground)',
                     fontSize: 12,
                   }
                 : undefined
@@ -136,25 +136,25 @@ export function BaseLineChart<T extends Record<string, unknown>>({
           />
           <Tooltip
             contentStyle={{
-              backgroundColor: 'hsl(var(--popover))',
-              border: '1px solid hsl(var(--border))',
+              backgroundColor: 'var(--color-popover)',
+              border: '1px solid var(--color-border)',
               borderRadius: 'var(--radius)',
-              color: 'hsl(var(--popover-foreground))',
+              color: 'var(--color-popover-foreground)',
               fontSize: 12,
             }}
             labelStyle={{
-              color: 'hsl(var(--popover-foreground))',
+              color: 'var(--color-popover-foreground)',
               fontWeight: 600,
               marginBottom: 4,
             }}
             formatter={tooltipFormatter}
-            cursor={{ stroke: 'hsl(var(--muted-foreground))', strokeOpacity: 0.3 }}
+            cursor={{ stroke: 'var(--color-muted-foreground)', strokeOpacity: 0.3 }}
           />
           {showLegend && (
             <Legend
               wrapperStyle={{
                 fontSize: 12,
-                color: 'hsl(var(--foreground))',
+                color: 'var(--color-foreground)',
               }}
             />
           )}

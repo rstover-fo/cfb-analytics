@@ -22,6 +22,10 @@ export const metadata: Metadata = {
   title: 'CFB Analytics | Oklahoma Sooners',
   description:
     'College football analytics platform for Oklahoma Sooners fans - historical stats, game analysis, recruiting, and more.',
+  other: {
+    'theme-color': '#1a1a1a',
+    'color-scheme': 'dark',
+  },
 };
 
 export default function RootLayout({

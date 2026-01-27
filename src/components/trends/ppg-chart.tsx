@@ -44,8 +44,8 @@ export function PPGChart({ data, height = 300, className }: PPGChartProps) {
         yAxisDomain={[0, 'dataMax']}
         yAxisLabel="Points per Game"
         lines={[
-          { dataKey: 'ppgOffense', name: 'Points Scored', color: 'hsl(var(--chart-1))' },
-          { dataKey: 'ppgDefense', name: 'Points Allowed', color: 'hsl(var(--chart-3))' },
+          { dataKey: 'ppgOffense', name: 'Points Scored', color: 'var(--color-chart-1)' },
+          { dataKey: 'ppgDefense', name: 'Points Allowed', color: 'var(--color-chart-3)' },
         ]}
         tooltipFormatter={(value, name) => {
           const formatted = typeof value === 'number' ? value.toFixed(1) : value;

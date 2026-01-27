@@ -39,15 +39,37 @@ async function DashboardContent({ season }: { season: number }) {
   );
 }
 
+function DashboardCardSkeleton() {
+  return (
+    <div className="bg-card rounded-lg border p-6 space-y-4">
+      <Skeleton className="h-5 w-32" />
+      <Skeleton className="h-8 w-20" />
+      <div className="space-y-2">
+        <Skeleton className="h-4 w-full" />
+        <Skeleton className="h-4 w-3/4" />
+        <Skeleton className="h-4 w-5/6" />
+      </div>
+    </div>
+  );
+}
+
 function DashboardSkeleton() {
   return (
     <>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {[1, 2, 3].map((i) => (
-          <Skeleton key={i} className="h-[200px] rounded-lg" />
-        ))}
+        <DashboardCardSkeleton />
+        <DashboardCardSkeleton />
+        <DashboardCardSkeleton />
       </div>
-      <Skeleton className="h-[120px] rounded-lg" />
+      <div className="bg-card rounded-lg border p-6 space-y-3">
+        <Skeleton className="h-5 w-40" />
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+          <Skeleton className="h-16" />
+          <Skeleton className="h-16" />
+          <Skeleton className="h-16" />
+          <Skeleton className="h-16" />
+        </div>
+      </div>
     </>
   );
 }

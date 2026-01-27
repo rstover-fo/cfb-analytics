@@ -15,7 +15,7 @@ interface PositionTrendsChartProps {
  */
 const POSITION_COLORS: Record<string, string> = {
   // Offense (warm colors)
-  QB: 'hsl(var(--chart-1))',
+  QB: 'var(--color-chart-1)',
   RB: 'hsl(25, 85%, 55%)',
   WR: 'hsl(35, 85%, 55%)',
   TE: 'hsl(45, 85%, 55%)',
@@ -43,10 +43,10 @@ const POSITION_COLORS: Record<string, string> = {
   LS: 'hsl(340, 50%, 60%)',
 
   // Fallback
-  Unknown: 'hsl(var(--muted-foreground))',
+  Unknown: 'var(--color-muted-foreground)',
 };
 
-const DEFAULT_COLOR = 'hsl(var(--muted-foreground))';
+const DEFAULT_COLOR = 'var(--color-muted-foreground)';
 
 /**
  * Get color for a position group

@@ -12,9 +12,9 @@ interface EPABreakdownChartProps {
  * Get bar color based on EPA value.
  */
 function getEPABarColor(epa: number): string {
-  if (epa > 0.1) return 'hsl(var(--chart-2))'; // green-ish
-  if (epa < -0.1) return 'hsl(var(--chart-3))'; // red-ish
-  return 'hsl(var(--chart-4))'; // neutral
+  if (epa > 0.1) return 'var(--color-chart-2)'; // green-ish
+  if (epa < -0.1) return 'var(--color-chart-3)'; // red-ish
+  return 'var(--color-chart-4)'; // neutral
 }
 
 /**
@@ -51,7 +51,7 @@ export function EPABreakdownChart({ data }: EPABreakdownChartProps) {
             {
               dataKey: 'epa',
               name: 'EPA/Play',
-              color: 'hsl(var(--chart-1))',
+              color: 'var(--color-chart-1)',
             },
           ]}
           height={200}

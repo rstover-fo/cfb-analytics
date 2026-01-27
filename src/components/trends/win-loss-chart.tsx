@@ -45,8 +45,8 @@ export function WinLossChart({ data, height = 300, className }: WinLossChartProp
         yAxisDomain={[0, 'dataMax']}
         yAxisLabel="Games"
         lines={[
-          { dataKey: 'wins', name: 'Wins', color: 'hsl(var(--chart-1))' },
-          { dataKey: 'losses', name: 'Losses', color: 'hsl(var(--chart-3))' },
+          { dataKey: 'wins', name: 'Wins', color: 'var(--color-chart-1)' },
+          { dataKey: 'losses', name: 'Losses', color: 'var(--color-chart-3)' },
         ]}
         tooltipFormatter={(value, name) => {
           return [`${value}`, name ?? ''];

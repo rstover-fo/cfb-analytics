@@ -29,7 +29,7 @@ export function EPATrendChart({ data }: EPATrendChartProps) {
             {
               dataKey: 'epaPerPlay',
               name: 'EPA/Play',
-              color: 'hsl(var(--chart-1))',
+              color: 'var(--color-chart-1)',
             },
           ]}
           height={250}

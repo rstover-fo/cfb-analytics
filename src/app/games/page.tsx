@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Check, X } from 'lucide-react';
 import { SeasonSelector } from '@/components/dashboard';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import {
   Table,
@@ -105,25 +106,23 @@ async function GamesTable({ season, page }: { season?: number; page: number }) {
       {/* Pagination */}
       {totalPages > 1 && (
         <div className="flex items-center justify-between">
-          <p className="text-muted-foreground text-sm">
-            Showing {offset + 1}-{Math.min(offset + limit, total)} of {total} games
+          <p className="text-muted-foreground text-sm tabular-nums">
+            Showing {offset + 1}&ndash;{Math.min(offset + limit, total)} of {total} games
           </p>
           <div className="flex gap-2">
             {page > 1 && (
-              <Link
-                href={`/games?${season ? `season=${season}&` : ''}page=${page - 1}`}
-                className="bg-secondary hover:bg-secondary/80 rounded px-3 py-1 text-sm"
-              >
-                Previous
-              </Link>
+              <Button asChild variant="secondary" size="sm">
+                <Link href={`/games?${season ? `season=${season}&` : ''}page=${page - 1}`}>
+                  Previous
+                </Link>
+              </Button>
             )}
             {page < totalPages && (
-              <Link
-                href={`/games?${season ? `season=${season}&` : ''}page=${page + 1}`}
-                className="bg-secondary hover:bg-secondary/80 rounded px-3 py-1 text-sm"
-              >
-                Next
-              </Link>
+              <Button asChild variant="secondary" size="sm">
+                <Link href={`/games?${season ? `season=${season}&` : ''}page=${page + 1}`}>
+                  Next
+                </Link>
+              </Button>
             )}
           </div>
         </div>
@@ -134,9 +133,26 @@ async function GamesTable({ season, page }: { season?: number; page: number }) {
 
 function TableSkeleton() {
   return (
-    <div className="space-y-3">
+    <div className="space-y-0">
+      {/* Table header skeleton */}
+      <div className="flex h-10 items-center gap-2 border-b px-2">
+        <Skeleton className="h-4 w-[100px]" />
+        <Skeleton className="h-4 w-[80px]" />
+        <Skeleton className="h-4 flex-1" />
+        <Skeleton className="h-4 w-[100px]" />
+        <Skeleton className="h-4 w-[100px]" />
+        <Skeleton className="hidden h-4 w-[150px] md:block" />
+      </div>
+      {/* Table rows skeleton */}
       {[...Array(10)].map((_, i) => (
-        <Skeleton key={i} className="h-12 w-full" />
+        <div key={i} className="flex h-12 items-center gap-2 border-b px-2">
+          <Skeleton className="h-4 w-[100px]" />
+          <Skeleton className="h-4 w-[80px]" />
+          <Skeleton className="h-4 flex-1" />
+          <Skeleton className="h-5 w-[50px] rounded-full" />
+          <Skeleton className="h-4 w-[80px]" />
+          <Skeleton className="hidden h-4 w-[150px] md:block" />
+        </div>
       ))}
     </div>
   );
@@ -160,12 +176,9 @@ export default async function GamesPage({ searchParams }: PageProps) {
         <div className="flex items-center gap-2">
           <SeasonSelector seasons={seasons} currentSeason={currentSeason || 0} />
           {currentSeason && (
-            <Link
-              href="/games"
-              className="bg-secondary hover:bg-secondary/80 rounded px-3 py-2 text-sm"
-            >
-              Show All
-            </Link>
+            <Button asChild variant="secondary" size="sm">
+              <Link href="/games">Show All</Link>
+            </Button>
           )}
         </div>
       </div>

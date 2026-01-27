@@ -59,8 +59,8 @@ export function ScoringTrendChart({
         yAxisDomain={[0, 'dataMax']}
         yAxisLabel="Points"
         lines={[
-          { dataKey: 'ouScore', name: 'Oklahoma', color: 'hsl(var(--chart-1))' },
-          { dataKey: 'oppScore', name: opponent, color: 'hsl(var(--chart-3))' },
+          { dataKey: 'ouScore', name: 'Oklahoma', color: 'var(--color-chart-1)' },
+          { dataKey: 'oppScore', name: opponent, color: 'var(--color-chart-3)' },
         ]}
         tooltipFormatter={(value, name) => {
           const formatted = typeof value === 'number' ? value.toString() : value;
